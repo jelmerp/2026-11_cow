@@ -1,0 +1,243 @@
+---
+title: "Computational Skills and AI<br>in Modern Biology"
+subtitle: "y code when ai?"
+date: "19 November 2026"
+author: Jelmer Poelstra
+institute: "CFAES Bioinformatics Core, The Ohio State University"
+format:
+  revealjs:
+    theme: [default, theme_slides.scss]
+    css: slides.css
+    smaller: true
+    scrollable: false
+    progress: true
+    incremental: false
+    slide-number: true
+    slide-level: 2
+    highlight-style: atom-one
+    toc: false
+    footer: "College of Wooster · November 2026"
+    template-partials:
+      - title-slide.html
+---
+
+## Sequencing got cheap
+
+- Cost per genome fell from ~$100M (2001) to a few hundred dollars today,
+  which is far faster than Moore's law. [PH: NHGRI cost-per-genome plot]
+- So the bottleneck has moved from **generating** data to **analyzing** it.
+
+## What happens in between?
+
+- [PH: a raw FASTQ snippet on the left, the final figure from a paper on the right]
+- That gap is the analysis, and it's where much of the work now happens.
+
+## Quick show of hands
+
+::: {.callout-note .quiz}
+- Who has used a command line? R or Python?
+- Who has deliberately used genAI in the past week? For coding?
+:::
+
+## About me
+
+Lead of the CFAES Bioinformatics Core at OSU
+
+## My background
+
+[Evolutionary genomes projects]
+
+# Overview of core facility bioinformatics {background-color="#A7B1B7"}
+
+## OSU's College of Food, Agricultural, and Environmental Sciences (CFAES)
+
+Key departments:
+
+- Plant Pathology
+- Entomology
+- Horticulture & Crop Science
+- Animal Sciences
+- Food Science & Technology
+- School of Environment & Natural Resources
+
+[CFAES logo]
+
+## Core facilities at OSU's CFAES
+
+- Facilities that provide specialized shared resources and expertise to researchers
+
+- Common types of core activities include sequencing, microscopy, and bioinformatics,
+  mass spectrometry, and flow cytometry
+
+- Our group of cores: Bioinformatics, Microscopy, Genomics, environmental sample testing
+
+## What is bioinformatics
+
+
+## What the bioinformatics core does
+
+- Research assistance
+
+- Teaching and training
+  - Workshops, courses, and one-on-one help
+  - Many biology grad students now have a component with large omics data,
+    but many have had no training in computational skills
+
+# Research projects and data types {background-color="#A7B1B7"}
+
+## Data types and organisms at our core
+
+- RNA-Seq
+- .....
+
+## A typical project
+
+- Consult on design → data arrive → QC & processing on a supercomputer (OSC) →
+  analysis & stats → figures → interpretation & writing. [PH: flow diagram]
+
+## Example project 1: [PH title]
+
+- [PH: organism, question, data type]
+- [PH: what I did; one key figure]
+
+## Example project 2: [PH evolutionary project title]
+
+- [PH: organism, evolutionary question, data type]
+- [PH: what I did; one key figure]
+
+## Example project 3: [PH title]
+
+- [PH: organism, question, data type]
+- [PH: what I did; one key figure]
+- [PH: a teaser such as "AI played a role here; more on that later"]
+
+# Why code to analyze omics data? {background-color="#A7B1B7"}
+
+## Why not Excel or a point-and-click program?
+
+- **Scale:** one sequencing run produces tens of gigabytes, with millions of reads per sample.
+  That's far too much for Excel, and often too much for a laptop.
+- **Tools:** most omics software only runs from the command line, often on a supercomputer.
+
+## Code lets you automate and customize
+
+- You can run the same steps on 6 samples or 600,
+  and rerun everything when something changes.
+- You can also do the analysis your question needs,
+  not just what a graphical program offers.
+
+## Side benefit 1: reproducibility
+
+- Your code is a complete record of what you did.
+  If a reviewer asks you to "rerun it without sample 7" eight months later, it takes an hour instead of a week.
+- It helps even more with good habits:
+  a clear project structure, version control, and a README.
+
+## Side benefit 2: you can use AI effectively
+
+- AI works with text. An agent can read your scripts, run them, and fix them,
+  but it can't easily repeat what you clicked through in a graphical program.
+- AI-written code can be checked and rerun, unlike numbers it reports in a chat.
+  But you have to be able to read the code yourself.
+
+# GenAI and bioinformatics work {background-color="#A7B1B7"}
+
+## "AI in biology" means many things
+
+- Predictive models (AlphaFold, DeepVariant) and generative models for DNA and proteins (Evo 2, RFdiffusion).
+- **LLMs** that write and run code, which is today's focus. [reuse w8a: "AI in research can mean very different things", condensed]
+
+## What an LLM actually does
+
+- Predicts the next **token**, using the whole conversation as context. [reuse w8a: "Large Language Models"]
+- So it can't "see" letters: ask it to count the A's in a sequence and it may fail. [reuse w8a: letter-count + DNA tokenizer]
+
+## From chat to agents
+
+- Chat: you paste in code and errors, and copy answers back and forth.
+- Agent: it reads your files, runs the code, sees the error, fixes it, and loops. [reuse w8a: "From chat to agents" table + agentic-loop figure]
+
+## Live demo
+
+- Claude Code in VS Code on a small, real-looking task.
+- Points to show: it reads the files, runs the code, hits and fixes an error, and I check the result.
+
+<!-- [ALT] Demo task options (have a pre-recorded fallback ready):
+A) Quarto report from a data set
+B) Small pipeline eg produce a phylogenetic tree
+C) ?
+-->
+
+## How my day-to-day has changed
+
+- **Much faster:** boilerplate and pipeline code, debugging obscure errors, documentation, reformatting messy data, and learning new tools.
+
+- **Unchanged:** experimental design, judging whether results make biological sense, and talking with researchers.
+
+- **More complicated** -- check AI's work, overthinking and over-engineering analyses
+
+## How AI came into one project
+
+- [PH: back to example project 3. What did AI do, and what would it have taken without it?]
+- [PH: where you had to step in, check, or correct it]
+
+## How it's changing the field
+
+- Researchers can do more of their own analysis, so the core's role is shifting toward review, judgment, and teaching.
+- Expectations of speed are going up.
+
+## The costs
+
+- **Your learning:** offloading the thinking can stall your skills,
+  especially while you're still building them [@lenharo2026].
+- **Everything else:** energy and water use, money (pay-per-use APIs, subscriptions), and data privacy.
+
+## Pitfalls: when it's wrong
+
+- **Hallucinations** sound just as confident as correct answers, and are more common for niche or new topics.
+  [reuse w8a: "Pitfalls II" (comfort vs. limitation zone)]
+- **Jagged frontier and the "0-to-90% problem":** it's brilliant at some tasks and fails at others, and finishing the last 10% is hard if you didn't do the first 90%.
+  [reuse w8a: "Pitfalls I"]
+
+## Pitfalls: when it agrees with you
+
+- **Sycophancy:** it tends to tell you what you want to hear, so ask "what could be wrong?" rather than "do you agree?"
+- **Narrative-flipping:** push back on its interpretation of your results and it may argue the opposite from the same evidence.
+  [reuse w8a: "Pitfalls III"]
+
+## Challenges for science
+
+- **Reproducibility:** the same prompt gives different answers, and models get updated and retired.
+- **Responsibility:** journals require you to disclose AI use, and you're accountable for every result.
+  [reuse w8a: "GenAI in this course and in your research", right column]
+
+## Expertise matters more, not less
+
+- "The most important skill in prompting is expertise in the domain you're prompting for." (Goedecke)
+- Experts spot wrong answers; beginners often can't. [reuse w8a: "GenAI and expertise" (NYT doctors article)]
+
+## Using genAI well
+
+- Ask for **code you can rerun and check**, not numbers or conclusions it reports directly.
+- Use it for tasks where you can verify the output, and as a tutor ("explain," "quiz me"). [reuse w8a: "What should you (not) use genAI for?"]
+
+::: callout-tip
+#### Learning *with* AI, not *instead of* learning
+
+- Try first, then ask. Ask it to explain or quiz you rather than to just do it.
+- If you couldn't explain the code to someone, you're not done.
+
+:::
+
+## Skills worth building?
+
+- Command line basics, R or Python
+- [Working through one real dataset from start to finish.]
+
+## Take-home messages
+
+- In much of biology, the bottleneck is now analysis, and that creates opportunities.
+- Coding is how you handle the data, and it also makes your work reproducible and AI-ready.
+- GenAI rewards expertise: build the fundamentals, then let AI speed you up.
+
+# Questions? {background-color="#A7B1B7"}
