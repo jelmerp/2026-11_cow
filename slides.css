@@ -610,6 +610,22 @@ kbd {
   font-weight: 600;
 }
 
+/* Brand colors, same style as the accent colors above */
+.primary {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.secondary {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.tertiary {
+  color: var(--color-tertiary);
+  font-weight: 600;
+}
+
 .todo {
   background-color: yellow;
   font-style: italic;
@@ -617,57 +633,110 @@ kbd {
 
 /* --------------------------------------------------------------------------/*
 /* Custom title slide (see title-slide.html template partial) */
-.reveal .title-slide-custom {
-  text-align: center;
-}
-
-.title-slide-logos {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+/* Left-aligned layout: red accent bar, big title, terminal-style subtitle,
+   byline, and a single logo anchored bottom-right. */
+.reveal .slides section.title-slide-custom {
+  text-align: left;
+  height: 100% !important;
+  top: 0 !important;
+  display: flex !important;
+  flex-direction: column;
   justify-content: center;
-  gap: 3.5em;
-  margin-top: 3em;
+  box-sizing: border-box;
 }
 
-.title-slide-logo {
-  height: 2.8em;
-  width: auto;
+.reveal .title-slide-custom .title-slide-text,
+.reveal .title-slide-custom .title-slide-text * {
+  text-align: left;
 }
 
-.title-slide-text .title {
+.title-slide-text {
+  padding: 0.2em 0 0.2em 1em;
+  margin-top: -1.2em;  /* optical centering: sit a little above middle */
+  border-left: 0.22em solid var(--color-primary);
+}
+
+/* Extra specificity needed to beat Quarto's `.reveal.smaller .slides h1` */
+.reveal .slides .title-slide-text h1.title {
   color: var(--color-primary);
-  font-size: 1.5em;
-  margin-bottom: 0.3em;
+  font-size: 2.65em;
+  line-height: 1.12;
+  margin: 0 0 0.35em;
+  text-align: left;
 }
 
 .title-slide-text .subtitle {
-  font-size: 1.2em;
+  font-family: var(--r-code-font, "SFMono-Regular", Menlo, Consolas, monospace);
+  font-size: 1.05em;
   font-weight: 400;
   color: var(--color-tertiary);
-  margin-bottom: 1.3em;
+  margin: 0;
 }
 
-.title-slide-text .author {
-  font-size: 1.05em;
-  font-weight: 600;
-  margin-bottom: 0.2em;
+.title-slide-prompt {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-right: 0.15em;
 }
 
-.title-slide-text .date {
-  font-size: 0.95em;
-  color: #4f4f4f;
+/* Blinking block cursor after the subtitle -- a quiet nod to the
+   "code" half of the talk while people find their seats. */
+.title-slide-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 0.12em;
+  vertical-align: -0.15em;
+  background: var(--color-secondary);
+  animation: title-slide-blink 1.1s steps(1) infinite;
+}
+
+@keyframes title-slide-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-slide-cursor { animation: none; }
 }
 
 .title-slide-rule {
-  width: 8em;
-  margin: 1em auto 0;
+  width: 3.5em;
+  margin: 1.1em 0 1em;
   border: none;
-  border-top: 2px solid var(--color-secondary);
+  border-top: 3px solid var(--color-secondary);
+}
+
+.title-slide-byline p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.title-slide-byline .author {
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+.title-slide-byline .institute,
+.title-slide-byline .date {
+  font-size: 0.85em;
+  color: #4f4f4f;
+}
+
+.title-slide-byline .date {
+  margin-top: 0.5em;
+}
+
+.reveal .title-slide-custom .title-slide-logo {
+  position: absolute;
+  right: 0;
+  bottom: 0.4em;
+  height: 2.6em;
+  width: auto;
+  margin: 0;
 }
 
 /* Hide the persistent corner logo and footer link on the title slide --
-   redundant with the larger logos already shown there, and on decks
+   redundant with the logo and venue already shown there, and on decks
    with a two-line title the footer would otherwise collide with them.
    !important is needed because Reveal's footer plugin sets an inline
    style="display: block" on every slide change. */
@@ -717,4 +786,49 @@ kbd {
 .reveal #refs .csl-entry,
 .reveal .references .csl-entry {
   margin-bottom: 0.3em;
+}
+
+/* Nucleotide colors in FASTQ code blocks (see dna-colors.html) */
+.reveal .nt-A { color: #1a9850; font-weight: bold; }
+.reveal .nt-C { color: #2166ac; font-weight: bold; }
+.reveal .nt-G { color: #e08214; font-weight: bold; }
+.reveal .nt-T { color: #d7301f; font-weight: bold; }
+.reveal .nt-N { color: #888888; }
+
+/* FASTQ block on "Sequencing got cheap": scroll inside, stop above the footer */
+.reveal pre.fastq-scroll code {
+  max-height: 250px !important;
+  overflow-y: auto !important;
+}
+
+/* --------------------------------------------------------------------------/*
+/* Slide counter: red, current slide only (slide-number: c in talk.qmd),
+   with the CFAES leaf right next to it. The leaf is drawn as ::before on
+   the counter itself (rather than via Quarto's `logo:` option) so the two
+   stay adjacent whatever the number's width. Reveal sets an inline
+   display:block on .slide-number, so the leaf is inline-block, not flex. */
+.reveal .slide-number {
+  color: var(--color-primary) !important;
+  background-color: transparent !important;
+  font-family: "BuckeyeSans", Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  right: 28px;
+  bottom: 6px;
+}
+
+.reveal .slide-number::before {
+  content: "";
+  display: inline-block;
+  width: 65px;
+  height: 76px;   /* leaf PNG is 332x388 */
+  margin-right: 0.3em;
+  vertical-align: text-bottom;   /* number sits low, by the stem */
+  background: url("img/cfaes-leaf-transparent.png") no-repeat center / contain;
+}
+
+/* Timeline text: dark gray (years + descriptions); dots/line keep accent colors */
+.timeline .event,
+.timeline .event::before {
+  color: #5a5a5a;
 }

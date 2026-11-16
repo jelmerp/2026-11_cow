@@ -1,0 +1,13 @@
+<script>
+// Color A/C/G/T in sequence lines of code blocks marked with the .dna class
+document.addEventListener("DOMContentLoaded", () => {
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  document.querySelectorAll(".dna code, pre.dna code").forEach(code => {
+    code.innerHTML = code.textContent.split("\n").map(line =>
+      /^[ACGTN]+$/.test(line)
+        ? line.replace(/[ACGTN]/g, b => `<span class="nt-${b}">${b}</span>`)
+        : esc(line)
+    ).join("\n");
+  });
+});
+</script>

@@ -2,18 +2,18 @@
   <div class="title-slide-text">
     <h1 class="title">$title$</h1>
 $if(subtitle)$
-    <p class="subtitle">$subtitle$</p>
-$endif$
-$for(author)$
-    <p class="author">$author$</p>
-$endfor$
-$if(date)$
-    <p class="date">$date$</p>
+    <p class="subtitle"><span class="title-slide-prompt" aria-hidden="true">&gt;</span> $subtitle$<span class="title-slide-cursor" aria-hidden="true"></span></p>
 $endif$
     <hr class="title-slide-rule">
+    <div class="title-slide-byline">
+$for(author)$
+      <p class="author">$author$</p>
+$endfor$
+$for(institute)$
+      <p class="institute">$institute$</p>
+$endfor$
+      <p class="date">$if(venue)$$venue$$if(date)$ &middot; $endif$$endif$$date$</p>
+    </div>
   </div>
-  <div class="title-slide-logos">
-    <img src="../img/CFAES-Horiz-RGBHEX.svg" alt="CFAES logo" class="title-slide-logo title-slide-logo-cfaes">
-    <img src="../img/logo4.png" alt="PRACS course logo" class="title-slide-logo title-slide-logo-course">
-  </div>
+  <img src="img/CFAES-Horiz-RGBHEX.svg" alt="CFAES, The Ohio State University" class="title-slide-logo">
 </section>
