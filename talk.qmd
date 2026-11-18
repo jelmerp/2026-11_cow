@@ -10,6 +10,7 @@ venue: "College of Wooster"
 author: Jelmer Poelstra
 institute: "CFAES Bioinformatics Core, The Ohio State University"
 bibliography: references.bib   # copy needed entries from the PRACS references.bib
+csl: ieee.csl                   # numbered citations: [1], [2], ...
 format:
   revealjs:
     theme: [default, theme_slides.scss]
@@ -33,16 +34,14 @@ filters:
 
 # Introduction {background-color="#A7B1B7"}
 
-## Sequencing got cheap
+## Sequencing has become *much* cheaper
 
 <!--
 POLLS: one Mentimeter (or Slido) presentation with these questions, in order:
-  1. Pre-vote: "If AI can write the code, do you still need to learn to code?"
-  3. How often do you deliberately use genAI?         (PRACS q3)
-  4. Do you feel conflicted about using genAI?          (PRACS q4)
-  5. "I feel ____ about AI" (word cloud)                (PRACS q9)
-  6. How has genAI affected your learning?              (PRACS q6, learning item only)
-  7. Post-vote: same as 1
+  1. Pre-vote: "In this age of AI, are computational skills less or more important for biologists?"
+  2. How often do you deliberately use genAI?         (PRACS q3)
+  3. "I feel ____ about AI" (word cloud)                (PRACS q9)
+  4. Post-vote: same as 1
 -->
 
 ![](/img/2022_Sequencing_cost_per_Human_Genome.jpg){fig-align="center" width="93%" fig-alt="A plot of the cost per human genome over time, showing a steep drop from about $100 million in 2001 to a few hundred dollars today, far faster than Moore's law." .lightbox}
@@ -205,7 +204,7 @@ FFFFFFFFFFFFFFFF:FFFFF:FFFFF,F:FFFF::FFF
 ::: {.column width="43%"}
 
 - Sequence data files use<br>4 lines per read, so ~2.4 billion lines
-- Excel's maximum is ~1 million rows: **~2,400 sheets**
+- Excel's maximum is ~1 million rows: **~2,300 sheets**
 
 :::
 :::
@@ -214,6 +213,7 @@ FFFFFFFFFFFFFFFF:FFFFF:FFFFF,F:FFFF::FFF
 - At 30x coverage
 - Math: 3.1 Gb genome × 30× coverage ≈ 93 Gb of sequence; at 150 bp per read ≈ 620 million reads.
 - 620 M reads × 4 lines ≈ 2.5 billion lines; ÷ 1,048,576 rows per sheet ≈ 2,365 sheets.
+- Slide rounds to 600 M reads: 2.4 billion lines ≈ 2,290 sheets, so "~2,300".
 - 30× is the standard for clinical/research human whole-genome sequencing.
 :::
 
@@ -238,7 +238,7 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 ::: {.column width="40%"}
 
-[PH: a final figure from a paper]
+[TODO: final figure (heatmap or volcano plot) from the maize RNA-seq project, which returns as an example project]
 
 :::
 :::
@@ -265,10 +265,19 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 - Many biologists don't learn to code, worsening the **analysis bottleneck**
 
-<hr style="height:1pt; visibility:hidden;" />
+- Most of my job is helping biologists do this or do it for them
+  (more on this later)
 
+:::
+:::
+
+::: {.columns}
+::: {.column width="48%"}
+:::
+
+::: {.column width="52%"}
 ::: {.callout-note .quiz}
-#### Who has used a command line?<br>Or R or Python?
+#### Who has used a command line? Or R or Python?
 :::
 
 :::
@@ -276,10 +285,9 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 ## What about generative AI?
 
-- Does generative AI (genAI) address this bottleneck?
-- Does an all-round biologist still need to learn to code ---\
-  or are foundational skills even more important now,
-  in order to use AI more effectively?
+- Does generative AI address this bottleneck?
+- Do biologists still need to learn to code ---\
+  or do foundational skills matter even more, to use AI well?
 
 <br>
 
@@ -290,6 +298,9 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 ::: {.callout-note .quiz}
 #### In this age of AI, are computational skills less or more important for biologists?
+- Less
+- More
+- It's complicated
 :::
 
 :::
@@ -304,14 +315,13 @@ This is the question in the subtitle.
 
 ## About me
 
-- At Ohio State University, lead of bioinformatics and microscopy core facilities
+- At Ohio State's Wooster campus, lead of **microscopy** and **bioinformatics** core facilities
 
-- Trained as a biologist,
-  did graduate and postdoc research in evolutionary genomics
+- Trained as a biologist, graduate and postdoc research in **evolutionary genomics**
 
-![](img/speciation-research-img.png){fig-align="center" width="100%" fig-alt="A figure from my research on speciation, showing a phylogenetic tree and a genome-wide plot of genetic differentiation." .lightbox}
+![](img/speciation-research-img.png){fig-align="center" width="100%" fig-alt="Illustrations of study organisms from my speciation research: a hooded and a carrion crow, two mouse lemur species, and three cichlid fish."}
 
-# Omics, sequencing, and bioinformatics {background-color="#A7B1B7"}
+# Omics, sequencing,<br>and bioinformatics {background-color="#A7B1B7"}
 
 ## Bioinformatics focuses on "omics" data
 
@@ -323,7 +333,7 @@ Copyright [ThermoFisher](https://www.thermofisher.com/us/en/home/brands/thermo-s
 
 ## High-throughput sequencing & omics data
 
-- High-throughput sequencing HTS produces **genomics**, **epigenomics**, and
+- High-throughput sequencing (HTS) produces **genomics**, **epigenomics**, and
   **transcriptomics** data
 
 ::: {.fragment data-fragment-index="1"}
@@ -360,19 +370,26 @@ First *Oxford Nanopore* sequencer,<br>the pocket-sized MinION
 ::: footer
 :::
 
+----
+
+![](img/hts-applications.png){.img-wide fig-align="center" fig-alt="Three HTS applications sketched from one starting point. At the top, a dense, unstructured pile of short reads labelled millions of reads from one HTS run, with three arrows fanning down. Left, genome assembly: five reads arranged as a staircase so each overlaps the one above, an arrow, and a single long blue line labelled one long, continuous sequence. Middle, variant analysis: six reads aligned above a grey reference genome line, with an amber cross at the same column in three of the six. Right, gene expression: reads sorted into two stacks, a tall stack over a teal bar labelled gene A and a short stack over a bar labelled gene B."}
+
+::: footer
+:::
+
 ## Why code to analyze omics data?
 
-Out of necessity, but it also offers significant advantages.
+Why not Excel or a point-and-click program?
+Code is a **necessity** but also offers significant **benefits**
+
+<hr style="height:10pt; visibility:hidden;" />
 
 ::: {.columns}
 ::: {.column width="29%" .box-tertiary}
-### Scale and tools
+### Necessary due to scale and tools
 
-Why not Excel or a point-and-click program?
-
-- **Scale:** remember, that's ~2,400 Excel sheets for one genome.
-  That's far too much for Excel, and often too much for a laptop.
-- **Tools:** most omics software only runs from the command line, often on a supercomputer.
+- Often too large for Excel, for many other programs, and for laptops
+- Often only run from the command line
 
 :::
 
@@ -382,65 +399,18 @@ Why not Excel or a point-and-click program?
 ::: {.column width="29%" .box-primary .fragment data-fragment-index="1"}
 ### Automation and flexibility
 
-- You can run the same steps on 6 samples or 600,
-  and rerun everything when something changes.
-- You have higher flexibility to customize the analysis to your specific needs
+- Code is nearly the same steps for 6 vs. 600 samples
+- More options to customize the analysis
 :::
 
 ::: {.column width="2%"}
 :::
 
 ::: {.column width="30%" .box-secondary .fragment data-fragment-index="2"}
-### Reproducibility
+### Reproducibility and transparency
 
-- Your code is a complete record of what you did.
-- Need to "rerun it without sample 7" eight months later?
-  It takes an hour instead of a week.
-
-:::
-:::
-
-*And*: working with genAI.
-
-<!----
-### Working with genAI
-
-- AI works with text. An agent can read your scripts, run them, and fix them,
-  but it can't easily repeat what you clicked through in a graphical program.
-- AI-written code can be checked and rerun, unlike numbers it reports in a chat.
-  But you have to be able to read the code yourself.
------->
-
-## Two stages of omics data analysis
-
-::: {.columns}
-::: {.column width="47%"}
-
-### ["Algorithmic" data processing]{style="display:block; text-align:center;"}
-
-- From raw data (e.g. reads) to tables (counts)
-- Where we deal with huge amounts of data
-- Analysis is run on a supercomputer,\
-  like the Ohio Supercomputer Center (OSC)
-- Mostly done in the terminal (command line)
-
-
-[PH: OSC and Bash logos]
-
-:::
-::: {.column width="6%"}
-<div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
-:::
-
-::: {.column width="47%"}
-
-### [Statistics and visualization]{style="display:block; text-align:center;"}
-
-- Analysis of the data in tables from the previous stage
-- Making sense of the data through statistical tests and visualizations
-- Mostly done in R or Python
-
-[PH: R and Python logos]
+- Your code is a complete record of what you did
+- Rerunning in full or "without sample 7" a year later is much easier
 
 :::
 :::
@@ -449,7 +419,8 @@ Why not Excel or a point-and-click program?
 
 ## Ohio State's CFAES
 
-College of Food, Agricultural, and Environmental Sciences (CFAES)
+Ohio State is divided into 15 colleges, and I work at **CFAES**:\
+The College of Food, Agricultural, and Environmental Sciences
 
 ::: {.columns}
 ::: {.column width="40%"}
@@ -466,18 +437,18 @@ College of Food, Agricultural, and Environmental Sciences (CFAES)
 :::
 ::: {.column width="60%"}
 
-<br>
+<hr style="height:60pt; visibility:hidden;" />
 
-![](/img/CFAES-Horiz-RGBHEX.svg){fig-align="center" width="90%" fig-alt="The Ohio State University College of Food, Agricultural, and Environmental Sciences logo" .lightbox}
+![](/img/CFAES-Horiz-RGBHEX.svg){fig-align="center" width="90%" fig-alt="The Ohio State University College of Food, Agricultural, and Environmental Sciences logo"}
 
 :::
 :::
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: {.callout-tip appearance="simple"}
+::: {.callout-note appearance="simple"}
 The **Wooster** campus houses half of CFAES,
-and the **Columbus** campus houses the other half.
+and the **Columbus** campus houses the other half
 :::
 
 ## The CFAES core facilities
@@ -487,8 +458,11 @@ and the **Columbus** campus houses the other half.
 
 ### [Why core facilities?]{style="display:block; text-align:center;"}
 
-- Core facilities provide specialized shared resources such as
-  **equipment** and **expertise** to researchers
+- Core facilities provide specialized resources like
+  [equipment]{.blue} and [expertise]{.amber}
+
+- Instead of duplicating expensive equipment and expertise in every lab,
+  cores allow researchers to **share** them
 
 :::
 ::: {.column width="6%"}
@@ -505,7 +479,24 @@ and the **Columbus** campus houses the other half.
   - Microscopy [*(Confocal, SEM, TEM)*]{style="color: #666666;"}
   - Environmental Testing
 
-[Add QR code]
+:::
+:::
+
+::: {.columns}
+::: {.column width="47%"}
+
+![](/img/rasc_QR.png){fig-align="right" width="40%" fig-alt="QR code linking to the CFAES Research and Analytical Service Cores page"}
+
+:::
+::: {.column width="6%"}
+
+:::
+::: {.column width="47%"}
+
+::: {.callout-tip appearance="simple"}
+- We also serve other institutions,<br>including the College of Wooster
+- User fees can be found on our website
+:::
 
 :::
 :::
@@ -513,20 +504,26 @@ and the **Columbus** campus houses the other half.
 ## What our bioinformatics facility provides
 
 ::: {.columns}
-::: {.column width="35%"}
+::: {.column width="36%"}
 
 - **Research assistance**\
   collaborative or consultative
 
 - **Teaching and training**\
-  courses, workshops,<br>1-on-1 help, "Code Club"
+  courses, workshops, 1-on-1 help
 
-<hr style="height:70pt; visibility:hidden;" />
+<hr style="height:1pt; visibility:hidden;" />
 
-![](/img/code-club_QR.png){fig-align="right" width="40%" fig-alt="QR code linking to the Code Club page" .lightbox}
+::: {.callout-note appearance="simple"}
+Our informal ~weekly [Code Club]{.blue} event is open to anyone!
+:::
+
+<hr style="height:1pt; visibility:hidden;" />
+
+![](/img/code-club_QR.png){fig-align="right" width="45%" fig-alt="QR code linking to the Code Club page"}
 
 :::
-::: {.column width="65%"}
+::: {.column width="64%"}
 
 ![](/img/code-club_screenshot.png){fig-align="center" width="95%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
 
@@ -537,17 +534,49 @@ and the **Columbus** campus houses the other half.
 :::
 :::
 
-## Common data and organisms we work with
+## What our bioinformatics facility provides
+
+::: {.columns}
+::: {.column width="36%"}
+
+- **Research assistance**\
+  collaborative or consultative
+
+- **Teaching and training**\
+  courses, workshops, 1-on-1 help
+
+<hr style="height:1pt; visibility:hidden;" />
+
+::: {.callout-note appearance="simple"}
+We hosted an intern from the College of Wooster last year
+:::
+
+![](/img/orip_QR.png){fig-align="right" width="45%" fig-alt="QR code linking to the ORIP program page"}
+
+:::
+::: {.column width="64%"}
+
+![](/img/orip2.png){fig-align="center" width="95%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
+
+::: legend2
+[ORIP Program](https://cfaes.osu.edu/current-students/undergraduate-students/undergraduate-research/ohio-state-research-internship-program){target="_blank"}
+:::
+
+:::
+:::
+
+
+## What we commonly work on
 
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [Data types]{style="display:block; text-align:center;"}
+### [Analysis types]{style="display:block; text-align:center;"}
 
-- **Genome assembly & annotation**: a new reference genome
-- **Resequencing**: genetic variation within and between populations
-- **RNA-seq**: which genes are turned on or off
-- **Metagenomics**: who's there in a microbial community
+- **Genome assembly**: new reference genomes
+- **Variant analysis**: genetic variation
+- **RNA-seq**: gene expression
+- **Metagenomics**: microbial communities
 
 :::
 ::: {.column width="6%"}
@@ -556,24 +585,33 @@ and the **Columbus** campus houses the other half.
 
 ::: {.column width="47%"}
 
-### [Organisms]{style="display:block; text-align:center;"}
+### [Research questions]{style="display:block; text-align:center;"}
 
-- **Crops**: e.g. soybean, wheat, tomato
-- **Plant pathogens**: fungi, oomycetes, bacteria, viruses
-- Insects, livestock, and other animals
-- Soil and gut microbes
+- Pathogen virulence & host resistance
+- Microbiome variation
+- Evolutionary genetics
 
 :::
 :::
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: callout-note
-#### Research questions
+::: {.columns}
+::: {.column width="15%"}
 
-- Genes involved in pathogen virulence and host resistance
-- Causes and consequences of microbiome variation
-- Evolutionary genetics (with EEOB, ecology & evolution dept.)
+:::
+::: {.column width="70%"}
+
+::: callout-note
+#### Organisms
+
+Crops, plant pathogens, insects, livestock, microbes, and more
+:::
+
+:::
+::: {.column width="15%"}
+
+:::
 :::
 
 ## Example projects I
@@ -581,9 +619,12 @@ and the **Columbus** campus houses the other half.
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [Maize transcriptomics]{style="display:block; text-align:center;"}
+### [Anglerfish genome assembly]{style="display:block; text-align:center;"}
 
-- TBA
+- **Question:** TBA
+- **Bioinformatics:** TBA
+
+[TODO: figure]
 
 :::
 ::: {.column width="6%"}
@@ -592,9 +633,12 @@ and the **Columbus** campus houses the other half.
 
 ::: {.column width="47%"}
 
-### [Soybean aphid piRNAs]{style="display:block; text-align:center;"}
+### [Snake population genomics]{style="display:block; text-align:center;"}
 
-- TBA
+- **Question:** TBA
+- **Bioinformatics:** TBA
+
+[TODO: figure]
 
 :::
 :::
@@ -604,32 +648,12 @@ and the **Columbus** campus houses the other half.
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [Snake population genomics]{style="display:block; text-align:center;"}
+### [Maize transcriptomics]{style="display:block; text-align:center;"}
 
-- TBA
+- **Question:** TBA
+- **Bioinformatics:** TBA
 
-:::
-::: {.column width="6%"}
-<div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
-:::
-
-::: {.column width="47%"}
-
-### [Anglerfish genome assembly]{style="display:block; text-align:center;"}
-
-- TBA
-
-:::
-:::
-
-## Example projects III
-
-::: {.columns}
-::: {.column width="47%"}
-
-### [Bacterial ice nucleation]{style="display:block; text-align:center;"}
-
-- TBA
+[TODO: figure]
 
 :::
 ::: {.column width="6%"}
@@ -640,14 +664,19 @@ and the **Columbus** campus houses the other half.
 
 ### [\[A microbiome study\]]{style="display:block; text-align:center;"}
 
-- TBA
+- **Question:** TBA
+- **Bioinformatics:** TBA
+
+[TODO: figure]
 
 :::
 :::
 
-# Generative AI (genAI) {background-color="#A7B1B7"}
+<!-- Dropped (see sandbox/removed.qmd): Soybean aphid piRNAs, Bacterial ice nucleation -->
 
-## You and GenAI
+# Generative AI {background-color="#A7B1B7"}
+
+## You and Generative AI (genAI)
 
 ::: {.columns}
 ::: {.column width="5%"}
@@ -659,7 +688,7 @@ and the **Columbus** campus houses the other half.
 
 1. How often do you deliberately use genAI?
    _hourly / daily / weekly / rarely / never_
-3. Complete the sentence: _"I feel ____ about AI"_
+2. Complete the sentence: _"I feel ____ about AI"_
 :::
 
 :::
@@ -667,29 +696,48 @@ and the **Columbus** campus houses the other half.
 :::
 :::
 
-[PH: Mentimeter QR code]
+[TODO: Mentimeter QR code]
 
 ## You vs. OSU grad students: frequency
 
-![](img/ai-survey_q3_frequency.png){fig-align="center" width="85%" fig-alt="Bar chart of how often OSU grad students deliberately use genAI." .lightbox}
+![](img/ai-survey_q3_frequency.png){fig-align="center" width="77%" fig-alt="Bar chart of how often OSU grad students deliberately use genAI."}
+
+::: legend2
+<hr style="height:15pt; visibility:hidden;" />
+19 students in AU26 [PLNTPTH 5006](https://cfaes-bioinfo.github.io/pracs-au26/){target="_blank"}
+course
+:::
+
+::: footer
+:::
 
 ## You vs. OSU grad students: vibes
 
-![](img/ai-survey_q9_feelings.png){fig-align="center" width="90%" fig-alt="Chart of how OSU grad students feel about AI." .lightbox}
+![](img/ai-survey_q9_feelings.png){.img-wide style="--img-width: 90%" fig-alt="Chart of how OSU grad students feel about AI."}
+
+::: legend2
+<hr style="height:15pt; visibility:hidden;" />
+19 students in AU26 [PLNTPTH 5006](https://cfaes-bioinfo.github.io/pracs-au26/){target="_blank"}
+course
+:::
+
+::: footer
+:::
 
 ## AI has transformed ...
 
 ## AI has transformed ... education
 
 ::: {.columns}
-::: {.column width="40%"}
+::: {.column width="33%"}
 
-✅ &nbsp; _Improved communication between students and instructors_
+✅ &nbsp; _Stronger student–instructor_
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _trust_
 
 :::
-::: {.column width="60%"}
+::: {.column width="67%"}
 
-![](img/ai-extension-email.jpeg){fig-align="center" width="95%" fig-alt="A screenshot of a student's email asking for an extension due to a family emergency, ending with leftover AI text: 'I've kept the family emergency vague so you won't have to explain further. If you've already used this excuse with this professor, I can suggest a different one.'" .lightbox}
+![](img/ai-extension-email_arrow.png){fig-align="center" width="100%" fig-alt="A screenshot of a student's email asking for an extension due to a family emergency, ending with leftover AI text: 'I've kept the family emergency vague so you won't have to explain further. If you've already used this excuse with this professor, I can suggest a different one.'" .lightbox}
 
 :::
 :::
@@ -716,10 +764,15 @@ From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas
 
 ## AI has transformed ... office life
 
-![](/img/marketoonist.png){fig-align="center" width="80%" fig-alt="..." .lightbox}
+✅ &nbsp; _More efficient communication_
+
+![](/img/marketoonist.png){fig-align="center" width="80%" fig-alt="Two-panel cartoon. Left: 'AI turns this single bullet point into a long email I can pretend I wrote.' Right: 'AI makes a single bullet point out of this long email I can pretend I read.'"}
 
 ::: legend2
-© [Marketoonist](https://marketoonist.com/2023/03/ai-written-ai-read.html)
+© [Marketoonist](https://marketoonist.com/2023/03/ai-written-ai-read.html){target="_blank"}
+:::
+
+::: footer
 :::
 
 ## AI has transformed ... scientific publishing
@@ -727,7 +780,7 @@ From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas
 ::: {.columns}
 ::: {.column width="35%"}
 
-✅ &nbsp; _Better writing_
+✅ &nbsp; _More effortless writing_
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -737,7 +790,9 @@ From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas
 :::
 ::: {.column width="65%"}
 
-![](/img/cabanac-firstpage-redbox.png){fig-align="center" width="88%" fig-alt="A screenshot of a PubPeer comment on a 2024 paper, showing that the introduction was AI-generated." .lightbox}
+![](/img/cabanac-firstpage-redbox.png){fig-align="center" width="88%" fig-alt="First page of a 2024 paper in Surfaces and Interfaces, with its introduction's AI-generated opening line boxed in red." .lightbox}
+
+[Zhang et al. 2024, *Surfaces and Interfaces* [@zhang2024]]{style="display:block; text-align:center; font-size:0.6em;"}
 
 :::
 :::
@@ -755,7 +810,7 @@ which made it past the authors, editors, and peer reviewers.
 ::: {.columns}
 ::: {.column width="35%"}
 
-✅ &nbsp; _Better writing_
+✅ &nbsp; _More effortless writing_
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -769,15 +824,17 @@ which made it past the authors, editors, and peer reviewers.
 
 ::: {.callout-warning appearance="simple"}
 
-These examples revolve around **unethical** human behavior.
+These examples are about how **people use** (or misuse) AI.
 
-What about **errors by AI**?
+What about **errors by AI** itself?
 :::
 
 :::
 ::: {.column width="65%"}
 
-![](/img/cabanac_retracted.png){fig-align="center" width="88%" fig-alt="A screenshot of a PubPeer comment on a 2024 paper, showing that the introduction was AI-generated." .lightbox}
+![](/img/cabanac_retracted.png){fig-align="center" width="88%" fig-alt="The same paper's first page, now stamped RETRACTED in red."}
+
+[Zhang et al. 2024, *Surfaces and Interfaces* [@zhang2024]]{style="display:block; text-align:center; font-size:0.6em;"}
 
 :::
 :::
@@ -786,7 +843,7 @@ What about **errors by AI**?
 :::
 
 ::: notes
-Maybe a citation hallucination example?
+TODO - Maybe a citation hallucination example?
 :::
 
 ----
@@ -799,46 +856,72 @@ Maybe a citation hallucination example?
 ![](img/ai-alphabet-crop.png){fig-align="left" width="95%" fig-alt="An AI-generated image illustrating the alphabet" .lightbox}
 
 ::: legend2
-A 2025 AI-generated alphabet poster\
-by [Maria Sukhareva](https://www.linkedin.com/posts/msukhareva_ai-tech-share-7346777128488640515-bTAd/){target="_blank"}.
+A 2025 [alphabet poster](https://www.linkedin.com/posts/msukhareva_ai-tech-share-7346777128488640515-bTAd/){target="_blank"}.\
+"PhD-level": Sam Altman in Aug 2025.
 :::
 :::
 ::: {.column width="65%"}
 
 . . .
 
-> _"How many **n**'s are in the word u**n**co**n**ve**n**tio**n**al?"_
-
-![](img/letter-count-unconventional-crop.png){fig-align="center" width="100%" fig-alt="A screenshot of a Microsoft Copilot response counting letters in a word" .lightbox}
+![](img/letter-count-unconventional-crop.png){fig-align="center" width="79%" fig-alt="A screenshot of a Microsoft Copilot response counting letters in a word" .lightbox}
 
 . . .
 
-<br>
+![](/img/GluePizzaAI_crop.png){fig-align="center" width="68%" fig-alt="A screenshot of the Google AI Overview suggesting glue on pizza" .lightbox}
 
-_[PH: screenshot of the Google AI Overview suggesting glue on pizza]_
+::: legend2
+Microsoft Copilot, Oct 2025 · Google AI Overview, May 2024
+:::
 
 :::
 :::
 
-# genAI in biology<br>and bioinformatics {background-color="#A7B1B7"}
+::: footer
+:::
 
-## "AI in biology" can mean many things
+# AI in biology<br>and bioinformatics {background-color="#A7B1B7"}
 
-- GenAI **can** be very helpful in research, including in biology and bioinformatics
+## AI in biology
 
-- If this seems surprising, given the above, consider that:
-  - Models have been improving extremely quickly
-  - The so-called "jagged frontier" means that you can't draw conclusions about
-    performance in one task from performance in another task
+Yet, genAI **can** be very helpful in research, including in biology and bioinformatics
 
-<hr style="height:1pt; visibility:hidden;" />
+<hr style="height:10pt; visibility:hidden;" />
 
-- Before getting into that,
-  let's first understand the different ways AI is used in biology.\
-  Confusion can arise because:
-  - "AI in biology" can mean many things
-  - The field is very fast-moving, yet some forms of AI have been around for decades
-  - Partly in the service of hype, terms are sometimes used loosely
+<!----
+### Working with genAI
+
+- AI works with text. An agent can read your scripts, run them, and fix them,
+  but it can't easily repeat what you clicked through in a graphical program.
+- AI-written code can be checked and rerun, unlike numbers it reports in a chat.
+  But you have to be able to read the code yourself.
+------>
+
+::: {.columns}
+::: {.column width="47%"}
+
+### [How could it possibly work well?]{style="display:block; text-align:center;"}
+
+- Models are improving extremely fast ---\
+  slapstick mistakes, and others, are gone
+- Skill at one task says little about another
+- AI is especially good with code
+
+:::
+::: {.column width="6%"}
+<div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+:::
+
+::: {.column width="47%"}
+
+### [Why it can be confusing]{style="display:block; text-align:center;"}
+
+- "AI in biology" means many things
+- Fast-moving, yet some AI is decades old
+- Terms are used loosely, partly due to hype
+
+:::
+:::
 
 ::: notes
   In the past year, tipping point from "sometimes helpful, sometimes not at all"
@@ -850,7 +933,7 @@ _[PH: screenshot of the Google AI Overview suggesting glue on pizza]_
 ::: {.columns}
 ::: {.column width="68%"}
 
-![](/img/ai_hierarchy.svg){fig-align="center" width="100%" fig-alt="Nested circles: artificial intelligence contains machine learning, which contains neural networks, which contain deep learning, which contains LLMs." .lightbox}
+![](/img/ai_hierarchy.svg){fig-align="center" width="100%" fig-alt="Nested circles: artificial intelligence contains machine learning, which contains neural networks, which contain deep learning, which contains LLMs."}
 
 :::
 ::: {.column width="32%"}
@@ -859,24 +942,12 @@ _[PH: screenshot of the Google AI Overview suggesting glue on pizza]_
 
 <hr style="height:1pt; visibility:hidden;" />
 
-- Generative AI is built on **deep learning**,
-  which is a subset of **neural networks**,
-  which is a subset of **machine learning**,
-  which is a subset of **artificial intelligence**.
+- **LLM = Large Language Model**: genAI that processes and generates text
 
-  _(In the figure, GANs and LLMs are examples of genAI.)_
-
-::: {.fragment data-fragment-index="1"}
-
-- **Large Language Models (LLMs)** are the kind of generative AI
-  that understands and generates text, including code.
-
-:::
-
-<br><br>
+<hr style="height:300pt; visibility:hidden;" />
 
 ::: {.legend2 .legend-left}
-Image by [Gladstone Institutes](https://gladstone-institutes.github.io)
+Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){target="_blank"}
 :::
 
 :::
@@ -885,86 +956,141 @@ Image by [Gladstone Institutes](https://gladstone-institutes.github.io)
 ::: footer
 :::
 
-## AI hierarchy
-
-[Add simplified AI -> genAI -> LLM diagram?]
-
 ## "AI in biology" can mean many things
 
 ::: {.columns}
-::: {.column width="31%" .box-blue}
+::: {.column width="31%" .box-tertiary}
 ### Predictive
 
-Predicts an answer from an input:
+**Predict from / classify input**
 
-- **AlphaFold**: protein structure from sequence
-- **DeepVariant**: DNA variants from reads
-
-:::
-::: {.column width="3%"}
-:::
-::: {.column width="31%" .box-amber .fragment data-fragment-index="1"}
-### Generative (biological)
-
-Creates new DNA or proteins:
-
-- **RFdiffusion**: new proteins
-- **Evo**: new DNA, even whole genomes
+- Protein structure from sequence (*AlphaFold*)
+- DNA variants from reads (*DeepVariant*)
 
 :::
 ::: {.column width="3%"}
 :::
-::: {.column width="31%" .box-teal .fragment data-fragment-index="2"}
-### Language models (LLMs)
+::: {.column width="31%" .box-primary .fragment data-fragment-index="1"}
+### Generative (bio)
 
-Generate text, including **code**:
+**Create new molecules**
 
-- ChatGPT, Claude, Gemini
-- **Today's focus**
+- New proteins (*RFdiffusion*)
+- New DNA, even whole genomes (*Evo*)
+
+:::
+::: {.column width="3%"}
+:::
+::: {.column width="31%" .box-secondary .fragment data-fragment-index="2"}
+### Generic LLMs
+
+**Generate text**
+
+- Including code,<br>which they excel at
+- *ChatGPT*, *Claude*, *Gemini*
+- [My main focus here]{.blue}
 
 :::
 :::
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: {.callout-tip .fragment data-fragment-index="3"}
-#### Success stories
-
-- 2024: **Nobel Prize** in Chemistry for Demis Hassabis & John Jumper (AlphaFold)
-  and David Baker (computational protein design).
-
-- 2025: the **Evo** genome language model designed bacteriophage genomes,
-  some of which outcompeted the natural phage in killing *E. coli*.
-  Possible use: **phage therapy** against antibiotic-resistant bacteria.
+::: {.columns .fragment data-fragment-index="3"}
+::: {.column width="31%"}
+::: {.callout-tip}
+#### AlphaFold's Nobel Prize
+2024: Nobel Prize in Chemistry for AlphaFold
+(shared with protein design) [@jumper2021]
+:::
+:::
+::: {.column width="3%"}
+:::
+::: {.column width="31%"}
+::: {.callout-tip}
+#### Evo's phage genomes
+2026: Evo designed phage genomes
+better at killing *E. coli* than the natural phage [@king2026]
+:::
+:::
+::: {.column width="3%"}
+:::
+::: {.column width="31%"}
+::: {.callout-tip}
+#### Claude's enzymes
+2026: Claude agents found a new
+CRISPR-like enzyme system in phage DNA [@yoon2026]
+:::
+:::
 :::
 
 ::: notes
-- Phages: King et al. 2025, bioRxiv, Arc Institute / Stanford (Brian Hie lab).
-  For the discussion: Evo 2's training data deliberately excluded viruses that infect eukaryotes, as a biosafety measure.
+- Nobel 2024: half to Hassabis & Jumper (AlphaFold, structure prediction),
+  half to David Baker (computational protein design).
+
+- Phages: Arc Institute / Stanford (Brian Hie lab); published in *Science*, Aug 2026
+  (preprint Sept 2025). Evo 1/2 fine-tuned on ~14,500 *Microviridae* genomes,
+  using the tiny lytic phage ΦX174 (~5.4 kb) as a design template.
+  ~300 designs synthesized, **16 viable**; a few killed faster than ΦX174, and one
+  had swapped in a packaging protein from the distant phage G4 (confirmed by cryo-EM).
+
+- Possible use: **phage therapy** against antibiotic-resistant bacteria.
+  Key result: a *cocktail* of generated phages overcame ΦX174-resistant *E. coli*
+  within 1-5 passages, where the natural phage alone failed.
+  Caveats if asked: all *in vitro*, no animal data; easiest possible target
+  (11 genes, lab host *E. coli* C, not a clinical pathogen); 16/300 viable shows the
+  model learns sequence statistics but not everything that makes a genome work.
+  Phage therapy itself is still unapproved in the US/EU - compassionate use and
+  small case series only; Nov 2026 guidelines still don't recommend it as routine care.
+  Oct 2026: Radical Numerics (ex-Evo team) announced the first AI-designed phage to
+  reach a patient under compassionate use - but AI-modified variants of existing
+  phages, not whole genomes, and they did not disclose the outcome.
+
+- For the discussion: Evo 2's training data deliberately excluded viruses that infect
+  eukaryotes, as a biosafety measure. The companion *Science* commentary [@inglesby2026]
+  argues DNA-synthesis screening matches orders against *known* pathogens, so a novel
+  AI-generated sequence may not trigger it: "the ability to compose viral genomes using
+  generative AI now exists; the governance to safely steer it does not."
+
+- Claude / ART (Anthropic, Sept 2026, preprint, not peer reviewed): ~950 Claude Code sessions
+  (~21 h, ~210 M tokens) mined protein databases for reverse transcriptases. One agent read the raw DNA
+  near an RT in a **jumbo phage** and noticed the same short sequence repeated: a CRISPR-like array.
+  Named ART ("array-associated reverse transcriptases"): RT + partner gene + repeat array.
+  Humans only wrote the initial prompt, chose what to test, and did the lab work: the array is
+  expressed as short RNAs. Function still **unknown**. Caveats if asked: most agent proposals were
+  rejected on human review; reportedly, 10 reruns of the same search didn't find it again [verify].
 
 - Optional extra example (from w8a): new rice immune receptors that recognize
   pathogen proteins, designed with generative AI [@zhu2026].
 :::
 
-# Agentic AI {background-color="#A7B1B7"}
+<!----
+## Agents doing biology
 
-## LLMs in bioinformatics via agentic AI
+- **Discovery:** Claude found a new family of enzymes
+  by spotting unusual repeats in phage DNA [@yoon2026].
+- **Design:** Claude designed protein binders
+  by running RFdiffusion and similar programs [@shanehsazzadeh2026].
+----->
 
-- The same LLMs that you may use in daily life are useful for bioinformatics,
-  because reading and writing code is one of the things they excel at.
+## Agentic AI: an LLM that takes actions
 
-- This becomes especially powerful when the LLM is **agentic**.
-  Agentic AI can perform tasks such as reading your project files, running commands,
-  and editing files.
+- LLMs can only spit out text,
+  but wrapped in an **agentic** interface, they can take actions
 
-- [Expert at desk analogy?]
+- An agentic LLM works in a loop of **"tool calls"**
+  (editing files, running commands)\
+  until it considers the task done
 
-- Agentic AI tools used as coding assistants, such as Claude Code,
-  can be **integrated into the editor** you use to write and run code.
+![](img/claude-agentic-loop.svg){fig-align="center" width="90%" fig-alt="Diagram of the agentic loop: your prompt leads to a loop of gathering context, taking action, and verifying results, which repeats until done, while you can interrupt, steer, or add context." .lightbox}
 
-## LLMs in bioinformatics via agentic AI
+::: legend2
+Image from the [Claude Code documentation](https://code.claude.com/docs/en/how-claude-code-works){target="_blank"}
+:::
 
-With the example task of **troubleshooting an error**:
+::: footer
+:::
+
+## Chat vs. agentic AI: troubleshooting an error
 
 ::: {.compare}
 ::: {.cmp-head}
@@ -974,6 +1100,16 @@ Chat AI
 :::
 ::: {.cmp-head .cmp-agent}
 Agentic AI
+:::
+
+::: {.cmp-label}
+Where it runs
+:::
+::: {}
+A browser tab, separate from your code
+:::
+::: {}
+Inside the editor where you write and run your code
 :::
 
 ::: {.cmp-label}
@@ -1007,33 +1143,49 @@ Agent runs the code, reads the errors, fixes them, and retries (loops) until don
 :::
 :::
 
-## The agentic loop
-
-An agent works in a loop of "**tool calls**"
-(reading files, running commands, editing files) until it considers the task done:
-
-![](img/claude-agentic-loop.svg){fig-align="center" width="90%" fig-alt="Diagram of the agentic loop: your prompt leads to a loop of gathering context, taking action, and verifying results, which repeats until done, while you can interrupt, steer, or add context." .lightbox}
-
-::: legend2
-Image from the [Claude Code docs](https://code.claude.com/docs/en/how-claude-code-works){target="_blank"}
+::: notes
+- Analogy: chat AI is an expert you phone and describe things to;
+  an agent is an expert sitting at your desk.
 :::
 
-## Agents doing biology
+## What should you (not) use AI for?
 
-- **Discovery:** Claude found a new family of enzymes
-  by spotting unusual repeats in phage DNA [@yoon2026].
-- **Design:** Claude designed protein binders
-  by running RFdiffusion and similar programs [@shanehsazzadeh2026].
+::: {.columns}
+::: {.column width="47%"}
 
-. . .
+### [Good uses]{style="display:block; text-align:center;"}
+
+- Tasks where you can **check the result**:
+  the code runs, the output matches expectations
+- **Tedious** tasks you know how to do
+- **Explaining** concepts, code, and errors
+  ("explain", "quiz me")
+
+:::
+::: {.column width="6%"}
+<div class="fragment" data-fragment-index="1" style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+:::
+
+::: {.column width="47%" .fragment data-fragment-index="1"}
+
+### [Be careful with]{style="display:block; text-align:center;"}
+
+- Tasks where you **can't judge** the output
+- **Judgment calls:** choosing methods or statistics,
+  interpreting results
+- **Niche or new** tools and topics
+- Numbers AI reports **directly**, rather than code you can rerun
+
+:::
+:::
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: callout-important
+::: {.callout-important .fragment data-fragment-index="2"}
 #### But: powerful also means dangerous
 
-2025: during an explicit "code freeze", Replit's AI agent **deleted a company's production database**.
-It then claimed the data couldn't be recovered, which turned out to be false.
+2025: during an explicit "code freeze", Replit's AI agent **deleted a company's production database**.\
+It then claimed the data couldn't be recovered, which turned out to be false
 :::
 
 ::: notes
@@ -1042,22 +1194,137 @@ and ran destructive commands despite instructions not to. [verify details]
 Lesson: limit permissions, keep backups and version control, review before letting it run.
 :::
 
-## Where this has been useful for me
+## Bioinformatics involves lots of grunt work
 
-- **Much faster:** boilerplate and pipeline code, debugging obscure errors, documentation, reformatting messy data, and learning new tools.
+::: {.columns}
+::: {.column width="47%"}
 
-- **More complicated** -- check AI's work, overthinking and over-engineering analyses
+### [Where AI agents shine for me]{style="display:block; text-align:center;"}
+
+- **Installing software:** getting a tool and all its
+  dependencies to run on a supercomputer
+- **File conversions:** between the many
+  bioinformatics file formats
+- **Terse documentation and cryptic errors:**
+  what does this option do, and why did it crash?
+
+:::
+::: {.column width="6%"}
+<div class="fragment" data-fragment-index="1" style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+:::
+
+::: {.column width="47%" .fragment data-fragment-index="1"}
+
+### [Why that matters]{style="display:block; text-align:center;"}
+
+- These tasks can eat [days]{.amber} of a project,
+  especially for beginners
+- They're tedious, but **easy to check**:
+  the tool runs or it doesn't
+- That frees up time for the biology
+
+:::
+:::
+
+::: notes
+- [TODO: one concrete before/after story from your own work, e.g. an install
+  or conversion that once took days and now took minutes with an agent.]
+- Callback to the first central question: much of the analysis bottleneck
+  is this kind of work, and that's exactly where AI helps most.
+:::
 
 # AI pitfalls and challenges {background-color="#A7B1B7"}
+
+## Pitfalls
+
+::: {.columns}
+::: {.column width="47%"}
+
+### [When it's wrong]{style="display:block; text-align:center;"}
+
+- **Hallucination:** makes up facts, references, and results,
+  and sounds [just as confident]{.amber} when it's wrong [@zhang2023]
+- **Comfort vs. limitation zone:** solid on common knowledge,
+  much weaker on niche or new topics
+- **Jagged frontier:** brilliant at some tasks, surprisingly bad at others [@dellacqua2023]
+
+:::
+::: {.column width="6%"}
+<div class="fragment" data-fragment-index="1" style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+:::
+::: {.column width="47%" .fragment data-fragment-index="1"}
+
+### [When it agrees with you]{style="display:block; text-align:center;"}
+
+- **Sycophancy:** trained on human ratings, it tells you what you
+  want to hear [@sharma2023]
+- **Narrative-flipping:** push back on its interpretation, and it may argue
+  the [opposite]{.amber} from the same evidence
+
+:::
+:::
+
+::: {.notes}
+April 2025: OpenAI rolled back a ChatGPT update that praised everything,
+including a plan to sell literal "poop on a stick".
+
+Optional audience questions:
+
+- Has AI ever confidently told you something wrong? How did you find out?
+  (The "how did you find out" part sets up the role of expertise.)
+- What kinds of questions are better or worse to ask an AI?
+  Better: common topics, and answers you can check (code you can run, sources you can open).
+  Worse: niche or very recent topics, and judgment calls where it may just agree with you.
+:::
+
+## Other challenges
+
+::: {.columns}
+::: {.column width="47%"}
+
+### [A moving target]{style="display:block; text-align:center;"}
+
+- Old pitfalls get fixed, new ones appear:
+  hallucinations are rarer, but [not gone]{.amber}
+- Advice (even peer-reviewed papers!) can be outdated within months
+
+:::
+::: {.column width="6%"}
+<div class="fragment" data-fragment-index="1" style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+:::
+::: {.column width="47%" .fragment data-fragment-index="1"}
+
+### [For science]{style="display:block; text-align:center;"}
+
+- **Reproducibility:** same prompt, different answers, and models get
+  updated and retired. Save [code you can rerun]{.amber}, not the chat.
+- **Responsibility:** you're accountable for every result,
+  whoever or whatever wrote it.
+  - 2025: Deloitte partially refunded a government
+    for a report with AI-fabricated references
+
+:::
+:::
+
+::: notes
+Deloitte, Oct 2025: a ~A$440,000 report for Australia's Department of Employment
+and Workplace Relations contained fabricated academic references and a made-up quote
+from a Federal Court judgment. Spotted by a University of Sydney researcher;
+Deloitte refunded the final installment and disclosed it had used GPT-4o. [verify details]
+
+Backup example: 2024, Air Canada's chatbot invented a refund policy. A tribunal ruled the
+airline had to honor it, rejecting the argument that the chatbot was
+"responsible for its own actions".
+:::
 
 ## The role of expertise
 
 ::: {.columns}
 ::: {.column width="47%"}
 
-![](img/nyt-doctors-ai-1.png){fig-align="center" width="80%" fig-alt="A New York Times opinion headline: Being a Doctor Will Never Be the Same After A.I." .lightbox}
+![](img/nyt-doctors-ai-1.png){fig-align="center" width="80%" fig-alt="A New York Times opinion headline: Being a Doctor Will Never Be the Same After A.I."}
 
-![](img/nyt-doctors-ai-3.png){fig-align="center" width="95%" fig-alt="The essay's subtitle: I have a confession: A.I. is making me a better doctor. And I worry that it's making doctors-in-training worse." .lightbox}
+![](img/nyt-doctors-ai-3.png){fig-align="center" width="95%" fig-alt="The essay's subtitle: I have a confession: A.I. is making me a better doctor. And I worry that it's making doctors-in-training worse."}
 
 ::: legend2
 New York Times, Sept 25, 2026
@@ -1066,129 +1333,74 @@ New York Times, Sept 25, 2026
 :::
 ::: {.column width="53%"}
 
-::: {.callout-note .quiz .fragment}
-#### Why might AI make experienced doctors better, but trainees worse? Does that apply to you?
+::: notes
+Ask audience: Why might AI make experienced doctors better, but trainees worse?
+Does that apply to you?
 :::
 
-. . .
+:::
+:::
+
+## The role of expertise
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](img/over-40-ready-to-use-ai_crop.png){fig-align="center" width="80%" fig-alt="A New York Times opinion headline: If You're Over 40, You're Ready to Use A.I."}
+
+::: legend2
+New York Times, July 27, 2026
+:::
+
+<br>
 
 > The most important skill in prompting is expertise in the domain you're prompting for.
 >
-> --- Sean Goedecke, "_LLMs reward expertise_"
-
-- Experts ask better questions and spot wrong answers. Beginners often can't.
-
-:::
-:::
-
-## Practical challenges
-
-- Costs
-- Data privacy
-
-::: callout-note
-#### Local models
-:::
-
-## Speed of change
-
-- Pitfalls from last year may be fixed this year, but new pitfalls arise.
-
-- E.g. arithmetic and counting errors, and widespread hallucinations much reduced now
-
-- Mostly improvements over time, which is good, but also means that:
-  - advice from a few months ago may be outdated
-  - a paper published after a lengthy peer review process is already out of date
-    by the time it appears in print
-
-## Pitfalls: when it's wrong
-
-::: {.columns}
-::: {.column width="40%"}
-
-![](img/limitations-comfort-zone.png){fig-align="center" width="90%" fig-alt="A circle shaded dark in the center, labeled comfort zone, and fading toward the edge, labeled limitation zone."}
-
-::: legend2
-Figure by Hannah Toth
-:::
+> --- [Sean Goedecke](https://www.seangoedecke.com/llms-reward-expertise){target="_blank"},
+> "_LLMs reward expertise_"
 
 :::
-::: {.column width="60%"}
-
-- **Comfort vs. limitation zone:** good with common knowledge,
-  but hallucinates more with niche or new topics.
-  And it sounds equally confident either way.
-
-. . .
-
-- **Jagged frontier:** brilliant at some tasks, surprisingly bad at others.
-- **"0-to-90% problem":** it gets you most of the way, but finishing is
-  **much harder** if you didn't do the first 90% yourself.
-
-:::
-:::
-
-## Pitfalls: when it agrees with you
-
-::: {.columns}
-::: {.column width="47%"}
-
-### [Sycophancy]{style="display:block; text-align:center;"}
-
-- Training on human ratings rewards answers people **like** [@sharma2023].
-- April 2025: OpenAI rolled back a ChatGPT update that praised everything,
-  including a plan to sell literal "poop on a stick".
-- Ask _"What could be wrong with this?"_, not _"Do you agree?"_
-
-:::
-::: {.column width="6%"}
-<div class="fragment" data-fragment-index="1" style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
+::: {.column width="3%"}
 :::
 ::: {.column width="47%" .fragment data-fragment-index="1"}
 
-### [Narrative-flipping]{style="display:block; text-align:center;"}
+- Experts ask better questions, spot wrong answers,
+  and steer AI to better solutions
 
-- Push back on its interpretation of your results,
-  and it may argue the **opposite** from the same evidence [@zhang2023].
-- Ask for the evidence on all sides **before** conclusions,
-  or get a second opinion in a fresh chat.
+- Beginners often can't tell when it's wrong,
+  and more easily fall prey to pitfalls like hallucination and sycophancy
+
+- **0-to-90% problem:** it gets you most of the way, but the last 10% is
+  [much harder]{.amber} if you didn't do the first 90% yourself
 
 :::
 :::
 
-## Challenges for science
+::: notes
+Q&A backup, if asked "should I learn with AI?" (a different question than this talk's):
 
-- **Reproducibility:** the same prompt gives different answers,
-  and models get updated and retired. Save the **code**, not the chat.
-
-. . .
-
-- **Responsibility:** you're accountable for every result, whoever or whatever wrote it.
-  - 2024: Air Canada's chatbot invented a refund policy.
-    A tribunal ruled the airline had to honor it,
-    rejecting the argument that the chatbot was "responsible for its own actions".
-  - Journals require you to disclose AI use, and AI can't be an author.
-
-- Ask for **code you can rerun and check**, not numbers or conclusions it reports directly.
-- Use it for tasks where you can verify the output, and as a tutor ("explain," "quiz me"). [reuse w8a: "What should you (not) use genAI for?"]
+- Anthropic randomized trial (Jan 2026): people learning a new coding library with AI help
+  scored ~17% lower on a follow-up quiz, and weren't significantly faster. [verify numbers]
+- Largest gap on **debugging** questions: the very skill you need to supervise AI-written code.
+- How you use it matters: those who asked conceptual questions learned much more
+  than those who had AI write the code. [verify]
+:::
 
 ## Back to the two central questions
 
-1. Can AI help address the data bottleneck in bioinformatics?
-1. y code when ai?
+1. Can AI help address the analysis bottleneck in bioinformatics?
 
+2. In this age of AI, are computational skills less or more important for biologists?
 
-- Coding is how you handle the data, and it also makes your work reproducible and AI-ready.
-- GenAI rewards expertise: build the fundamentals, then let AI speed you up.
 
 ## The vote, again
 
 ::: {.callout-note .quiz}
-#### If AI can write the code, do you still need to learn to code?
+#### In this age of AI, are computational skills less or more important for biologists?
 
-- Yes
-- No
-- It depends
+- Less
+- More
+- It's complicated
 :::
 
 ::: notes
@@ -1197,6 +1409,13 @@ That makes a natural opening for Q&A.
 :::
 
 # Questions? {background-color="#A7B1B7"}
+
+<hr style="height:50pt; visibility:hidden;" />
+
+You can find this slide deck at
+[jelmerp.github.io/2026-11_cow/talk.html](https://jelmerp.github.io/2026-11_cow/talk.html){target="_blank"}
+
+[TODO: QR code, once GitHub Pages is enabled and the URL is confirmed]
 
 ## References
 
