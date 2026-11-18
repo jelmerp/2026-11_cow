@@ -39,9 +39,8 @@ filters:
 <!--
 POLLS: one Mentimeter (or Slido) presentation with these questions, in order:
   1. Pre-vote: "In this age of AI, are computational skills less or more important for biologists?"
-  2. How often do you deliberately use genAI?         (PRACS q3)
-  3. "I feel ____ about AI" (word cloud)                (PRACS q9)
-  4. Post-vote: same as 1
+  2. Post-vote: same as 1
+(genAI-use question is a show of hands on the "Who has used a command line?" slide)
 -->
 
 ![](/img/2022_Sequencing_cost_per_Human_Genome.jpg){fig-align="center" width="93%" fig-alt="A plot of the cost per human genome over time, showing a steep drop from about $100 million in 2001 to a few hundred dollars today, far faster than Moore's law." .lightbox}
@@ -283,10 +282,15 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 :::
 :::
 
+::: notes
+Show of hands. Expect many more hands for genAI than for coding:
+that contrast leads into the next slide.
+:::
+
 ## What about generative AI?
 
-- Does generative AI address this bottleneck?
-- Do biologists still need to learn to code ---\
+- Does **generative AI** address this bottleneck?
+- Do biologists still need to **learn to code** ---\
   or do foundational skills matter even more, to use AI well?
 
 <br>
@@ -515,12 +519,12 @@ and the **Columbus** campus houses the other half
 <hr style="height:1pt; visibility:hidden;" />
 
 ::: {.callout-note appearance="simple"}
-Our informal ~weekly [Code Club]{.blue} event is open to anyone!
+Our informal weekly [Code Club]{.blue} event is open to anyone!
 :::
 
 <hr style="height:1pt; visibility:hidden;" />
 
-![](/img/code-club_QR.png){fig-align="right" width="45%" fig-alt="QR code linking to the Code Club page"}
+![](/img/code-club_QR.png){fig-align="right" width="55%" fig-alt="QR code linking to the Code Club page"}
 
 :::
 ::: {.column width="64%"}
@@ -551,7 +555,7 @@ Our informal ~weekly [Code Club]{.blue} event is open to anyone!
 We hosted an intern from the College of Wooster last year
 :::
 
-![](/img/orip_QR.png){fig-align="right" width="45%" fig-alt="QR code linking to the ORIP program page"}
+![](/img/orip_QR.png){fig-align="right" width="50%" fig-alt="QR code linking to the ORIP program page"}
 
 :::
 ::: {.column width="64%"}
@@ -676,54 +680,6 @@ Crops, plant pathogens, insects, livestock, microbes, and more
 
 # Generative AI {background-color="#A7B1B7"}
 
-## You and Generative AI (genAI)
-
-::: {.columns}
-::: {.column width="5%"}
-:::
-::: {.column width="90%"}
-
-::: {.callout-note .quiz}
-#### Two quick questions
-
-1. How often do you deliberately use genAI?
-   _hourly / daily / weekly / rarely / never_
-2. Complete the sentence: _"I feel ____ about AI"_
-:::
-
-:::
-::: {.column width="5%"}
-:::
-:::
-
-[TODO: Mentimeter QR code]
-
-## You vs. OSU grad students: frequency
-
-![](img/ai-survey_q3_frequency.png){fig-align="center" width="77%" fig-alt="Bar chart of how often OSU grad students deliberately use genAI."}
-
-::: legend2
-<hr style="height:15pt; visibility:hidden;" />
-19 students in AU26 [PLNTPTH 5006](https://cfaes-bioinfo.github.io/pracs-au26/){target="_blank"}
-course
-:::
-
-::: footer
-:::
-
-## You vs. OSU grad students: vibes
-
-![](img/ai-survey_q9_feelings.png){.img-wide style="--img-width: 90%" fig-alt="Chart of how OSU grad students feel about AI."}
-
-::: legend2
-<hr style="height:15pt; visibility:hidden;" />
-19 students in AU26 [PLNTPTH 5006](https://cfaes-bioinfo.github.io/pracs-au26/){target="_blank"}
-course
-:::
-
-::: footer
-:::
-
 ## AI has transformed ...
 
 ## AI has transformed ... education
@@ -780,7 +736,8 @@ From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas
 ::: {.columns}
 ::: {.column width="35%"}
 
-✅ &nbsp; _More effortless writing_
+✅ &nbsp; _Making scientific writing less_
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _tedious_
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -810,7 +767,8 @@ which made it past the authors, editors, and peer reviewers.
 ::: {.columns}
 ::: {.column width="35%"}
 
-✅ &nbsp; _More effortless writing_
+✅ &nbsp; _Making scientific writing less_
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _tedious_
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -884,7 +842,8 @@ Microsoft Copilot, Oct 2025 · Google AI Overview, May 2024
 
 ## AI in biology
 
-Yet, genAI **can** be very helpful in research, including in biology and bioinformatics
+Yet, genAI **can** be exceptionally helpful in research,
+including in biology and bioinformatics
 
 <hr style="height:10pt; visibility:hidden;" />
 
@@ -900,7 +859,7 @@ Yet, genAI **can** be very helpful in research, including in biology and bioinfo
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [How could it possibly work well?]{style="display:block; text-align:center;"}
+### [Despite the blunders]{style="display:block; text-align:center;"}
 
 - Models are improving extremely fast ---\
   slapstick mistakes, and others, are gone
@@ -914,10 +873,10 @@ Yet, genAI **can** be very helpful in research, including in biology and bioinfo
 
 ::: {.column width="47%"}
 
-### [Why it can be confusing]{style="display:block; text-align:center;"}
+### [The terminology can be confusing]{style="display:block; text-align:center;"}
 
 - "AI in biology" means many things
-- Fast-moving, yet some AI is decades old
+- Some approaches are decades old
 - Terms are used loosely, partly due to hype
 
 :::
@@ -942,7 +901,8 @@ Yet, genAI **can** be very helpful in research, including in biology and bioinfo
 
 <hr style="height:1pt; visibility:hidden;" />
 
-- **LLM = Large Language Model**: genAI that processes and generates text
+**LLM = Large Language Model**\
+genAI that processes and generates text
 
 <hr style="height:300pt; visibility:hidden;" />
 
@@ -954,6 +914,11 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 :::
 
 ::: footer
+:::
+
+::: notes
+- k-means, k-nearest neighbors, decision trees and SVMs are from the 50s and 60s
+- Random forests are from around 2000
 :::
 
 ## "AI in biology" can mean many things
@@ -1148,18 +1113,16 @@ Agent runs the code, reads the errors, fixes them, and retries (loops) until don
   an agent is an expert sitting at your desk.
 :::
 
-## What should you (not) use AI for?
+## What to (not) use AI for?
 
 ::: {.columns}
 ::: {.column width="47%"}
 
 ### [Good uses]{style="display:block; text-align:center;"}
 
-- Tasks where you can **check the result**:
-  the code runs, the output matches expectations
+- Tasks where you can **check the result**
 - **Tedious** tasks you know how to do
 - **Explaining** concepts, code, and errors
-  ("explain", "quiz me")
 
 :::
 ::: {.column width="6%"}
@@ -1171,22 +1134,28 @@ Agent runs the code, reads the errors, fixes them, and retries (loops) until don
 ### [Be careful with]{style="display:block; text-align:center;"}
 
 - Tasks where you **can't judge** the output
-- **Judgment calls:** choosing methods or statistics,
-  interpreting results
-- **Niche or new** tools and topics
-- Numbers AI reports **directly**, rather than code you can rerun
+- Judgment calls in areas where you have limited experience
+- Niche or new tools and topics
 
 :::
 :::
 
 <hr style="height:1pt; visibility:hidden;" />
 
+::: callout-note
+#### Reproducibility and responsibility
+- Make it output [code you can rerun]{.amber}
+- You're accountable for every result, whoever or whatever wrote it
+:::
+
+<!-----
 ::: {.callout-important .fragment data-fragment-index="2"}
 #### But: powerful also means dangerous
 
 2025: during an explicit "code freeze", Replit's AI agent **deleted a company's production database**.\
 It then claimed the data couldn't be recovered, which turned out to be false
 :::
+------>
 
 ::: notes
 Replit / SaaStr (Jason Lemkin), July 2025. The agent "panicked" when it saw empty query results
@@ -1199,14 +1168,16 @@ Lesson: limit permissions, keep backups and version control, review before letti
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [Where AI agents shine for me]{style="display:block; text-align:center;"}
+### [Easy calls]{style="display:block; text-align:center;"}
 
-- **Installing software:** getting a tool and all its
-  dependencies to run on a supercomputer
-- **File conversions:** between the many
-  bioinformatics file formats
-- **Terse documentation and cryptic errors:**
-  what does this option do, and why did it crash?
+- Tough software installations
+- Difficult errors
+- File conversions
+- Terse documentation
+- Circumventing bugs in software
+- Proofreading code and pipelines
+- Writing boilerplate code
+- Polishing visualizations
 
 :::
 ::: {.column width="6%"}
@@ -1215,13 +1186,10 @@ Lesson: limit permissions, keep backups and version control, review before letti
 
 ::: {.column width="47%" .fragment data-fragment-index="1"}
 
-### [Why that matters]{style="display:block; text-align:center;"}
+### [Powerful but trickier]{style="display:block; text-align:center;"}
 
-- These tasks can eat [days]{.amber} of a project,
-  especially for beginners
-- They're tedious, but **easy to check**:
-  the tool runs or it doesn't
-- That frees up time for the biology
+- Selecting tools and parameters
+- Interpreting results
 
 :::
 :::
@@ -1231,9 +1199,8 @@ Lesson: limit permissions, keep backups and version control, review before letti
   or conversion that once took days and now took minutes with an agent.]
 - Callback to the first central question: much of the analysis bottleneck
   is this kind of work, and that's exactly where AI helps most.
+- 2025: Deloitte partially refunded a government for a report with AI-fabricated references
 :::
-
-# AI pitfalls and challenges {background-color="#A7B1B7"}
 
 ## Pitfalls
 
@@ -1242,11 +1209,10 @@ Lesson: limit permissions, keep backups and version control, review before letti
 
 ### [When it's wrong]{style="display:block; text-align:center;"}
 
-- **Hallucination:** makes up facts, references, and results,
-  and sounds [just as confident]{.amber} when it's wrong [@zhang2023]
-- **Comfort vs. limitation zone:** solid on common knowledge,
-  much weaker on niche or new topics
-- **Jagged frontier:** brilliant at some tasks, surprisingly bad at others [@dellacqua2023]
+- **Hallucinations** (more likely on niche topics)
+- **Jagged frontier**\
+  (brilliant at some tasks, terrible at others)
+- **Confidence is not accuracy**
 
 :::
 ::: {.column width="6%"}
@@ -1256,37 +1222,24 @@ Lesson: limit permissions, keep backups and version control, review before letti
 
 ### [When it agrees with you]{style="display:block; text-align:center;"}
 
-- **Sycophancy:** trained on human ratings, it tells you what you
-  want to hear [@sharma2023]
-- **Narrative-flipping:** push back on its interpretation, and it may argue
-  the [opposite]{.amber} from the same evidence
+- **Sycophancy**\
+  (tells you what you want to hear)
+- **Narrative-flipping**\
+  (can argue [opposite]{.amber} from same evidence)
 
 :::
 :::
 
-::: {.notes}
-April 2025: OpenAI rolled back a ChatGPT update that praised everything,
-including a plan to sell literal "poop on a stick".
-
-Optional audience questions:
-
-- Has AI ever confidently told you something wrong? How did you find out?
-  (The "how did you find out" part sets up the role of expertise.)
-- What kinds of questions are better or worse to ask an AI?
-  Better: common topics, and answers you can check (code you can run, sources you can open).
-  Worse: niche or very recent topics, and judgment calls where it may just agree with you.
-:::
-
-## Other challenges
+<br>
 
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [A moving target]{style="display:block; text-align:center;"}
+### [It's complicated]{style="display:block; text-align:center;"}
 
-- Old pitfalls get fixed, new ones appear:
-  hallucinations are rarer, but [not gone]{.amber}
-- Advice (even peer-reviewed papers!) can be outdated within months
+- **0-to-90% problem:** it gets you most of the way, but the last 10% is
+  [much harder]{.amber} if you didn't do the first 90% yourself
+- Can overcomplicate things and be too detail-oriented
 
 :::
 ::: {.column width="6%"}
@@ -1294,25 +1247,26 @@ Optional audience questions:
 :::
 ::: {.column width="47%" .fragment data-fragment-index="1"}
 
-### [For science]{style="display:block; text-align:center;"}
+### [A moving target]{style="display:block; text-align:center;"}
 
-- **Reproducibility:** same prompt, different answers, and models get
-  updated and retired. Save [code you can rerun]{.amber}, not the chat.
-- **Responsibility:** you're accountable for every result,
-  whoever or whatever wrote it.
-  - 2025: Deloitte partially refunded a government
-    for a report with AI-fabricated references
+- These pitfalls may not all apply next year
+- Advice on e.g. prompting and best practices also becomes outdated quickly
 
 :::
 :::
 
-::: notes
+::: {.notes}
+- May be prone to reinventing the wheel
+
+April 2025: OpenAI rolled back a ChatGPT update that praised everything,
+including a plan to sell literal "poop on a stick".
+
 Deloitte, Oct 2025: a ~A$440,000 report for Australia's Department of Employment
 and Workplace Relations contained fabricated academic references and a made-up quote
 from a Federal Court judgment. Spotted by a University of Sydney researcher;
 Deloitte refunded the final installment and disclosed it had used GPT-4o. [verify details]
 
-Backup example: 2024, Air Canada's chatbot invented a refund policy. A tribunal ruled the
+2024, Air Canada's chatbot invented a refund policy. A tribunal ruled the
 airline had to honor it, rejecting the argument that the chatbot was
 "responsible for its own actions".
 :::
@@ -1352,38 +1306,24 @@ Does that apply to you?
 New York Times, July 27, 2026
 :::
 
-<br>
+:::
+::: {.column width="50%" .fragment data-fragment-index="1"}
 
 > The most important skill in prompting is expertise in the domain you're prompting for.
 >
 > --- [Sean Goedecke](https://www.seangoedecke.com/llms-reward-expertise){target="_blank"},
 > "_LLMs reward expertise_"
 
-:::
-::: {.column width="3%"}
-:::
-::: {.column width="47%" .fragment data-fragment-index="1"}
+<hr style="height:1pt; visibility:hidden;" />
 
 - Experts ask better questions, spot wrong answers,
   and steer AI to better solutions
-
-- Beginners often can't tell when it's wrong,
-  and more easily fall prey to pitfalls like hallucination and sycophancy
-
-- **0-to-90% problem:** it gets you most of the way, but the last 10% is
-  [much harder]{.amber} if you didn't do the first 90% yourself
 
 :::
 :::
 
 ::: notes
-Q&A backup, if asked "should I learn with AI?" (a different question than this talk's):
-
-- Anthropic randomized trial (Jan 2026): people learning a new coding library with AI help
-  scored ~17% lower on a follow-up quiz, and weren't significantly faster. [verify numbers]
-- Largest gap on **debugging** questions: the very skill you need to supervise AI-written code.
-- How you use it matters: those who asked conceptual questions learned much more
-  than those who had AI write the code. [verify]
+- Beginners often can't tell when it's wrong, more prone to pitfalls
 :::
 
 ## Back to the two central questions
@@ -1413,9 +1353,9 @@ That makes a natural opening for Q&A.
 <hr style="height:50pt; visibility:hidden;" />
 
 You can find this slide deck at
-[jelmerp.github.io/2026-11_cow/talk.html](https://jelmerp.github.io/2026-11_cow/talk.html){target="_blank"}
+[jelmerp.github.io/cow-talk_2026-11/talk.html](https://jelmerp.github.io/cow-talk_2026-11/talk.html){target="_blank"}
 
-[TODO: QR code, once GitHub Pages is enabled and the URL is confirmed]
+![](img/qr-talk.svg){.nostretch width="250px" fig-align="center" fig-alt="QR code linking to the slide deck"}
 
 ## References
 
