@@ -832,3 +832,30 @@ kbd {
 .timeline .event::before {
   color: #5a5a5a;
 }
+
+/* Legends under the QR codes on the grey "Questions?" slide */
+.qr-legend {
+  text-align: center;
+  color: #1f2a30;
+  font-size: 0.85em;
+  margin-top: 0.4em;
+}
+.qr-legend a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------/*
+/* .fig-tight: drop the default margins around a figure (img margin + the
+   quarto-figure bottom margin) so it can be larger on a vertically full slide.
+   Put it on the containing column: ::: {.column width="40%" .fig-tight} */
+.reveal .fig-tight img {
+  display: block;            /* no inline line-height gap below the image */
+  margin: 0 auto !important; /* auto keeps it centered once it's a block */
+}
+
+.reveal .fig-tight .quarto-figure,
+.reveal .fig-tight figure,
+.reveal .fig-tight p {
+  margin: 0 !important;
+}
