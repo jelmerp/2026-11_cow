@@ -36,8 +36,6 @@ filters:
 
 ## Sequencing has become *much* cheaper
 
-<!-- TODO: Mentimeter (or Slido) question -->
-
 ![](/img/2022_Sequencing_cost_per_Human_Genome.jpg){fig-align="center" width="93%" fig-alt="A plot of the cost per human genome over time, showing a steep drop from about $100 million in 2001 to a few hundred dollars today, far faster than Moore's law." .lightbox}
 
 ::: legend2
@@ -48,8 +46,8 @@ From [genome.gov/sequencingcosts](https://genome.gov/sequencingcosts){target="_b
 :::
 
 ::: notes
-- Cost per human genome: ~$100 million in 2001, a few hundred dollars today.
-- That's far faster than Moore's law, which predicts computer power improving
+- Note log-scale on y-axis
+- Drop is far faster than Moore's law, which predicts computer power improving
   (number of transistors on a microchip doubles approximately every two years)
 - In 2025-2026, has fallen to about $300
 :::
@@ -57,19 +55,19 @@ From [genome.gov/sequencingcosts](https://genome.gov/sequencingcosts){target="_b
 ## This has led to a data explosion
 
 ::: {.columns}
-::: {.column width="15%"}
+::: {.column width="12%"}
 
 :::
-::: {.column width="70%"}
+::: {.column width="76%"}
 
 ::: {.callout-note .quiz}
-#### If sequencing one person's genome takes ~600 million reads,<br>how many Excel sheets would its data file fill?
+#### If sequencing one person's genome takes ~600 million sequence "reads",<br>how many Excel sheets would its data file fill?
 
 25 · 250 · 2,500 · 25,000
 :::
 
 :::
-::: {.column width="15%"}
+::: {.column width="12%"}
 :::
 :::
 
@@ -198,6 +196,9 @@ FFFFFFFFFFFFFFFF:FFFFF:FFFFF,F:FFFF::FFF
 ::: {.column width="43%"}
 
 - Sequence data files use<br>4 lines per read, so ~2.4 billion lines
+
+. . .
+
 - Excel's maximum is ~1 million rows: [~2,300 sheets]{.teal}
 
 :::
@@ -240,27 +241,26 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 <hr style="height:1pt; visibility:hidden;" />
 
 ::: {.columns}
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="1"}
 
-### [What is done?]{style="display:block; text-align:center;"}
+### [What is done in between?]{style="display:block; text-align:center;"}
 
-- **Bioinformatics** turns sequence data and other big bio-data into biological insights
+- **Bioinformatics** involves the analysis of sequence data and other big bio-data
 
 - Most tools used to do so are operated via **code** and run on **supercomputers**
 
 :::
-::: {.column width="6%"}
+::: {.column width="6%" .fragment data-fragment-index="2"}
 <div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
 :::
 
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="2"}
 
 ### [Can anyone do it?]{style="display:block; text-align:center;"}
 
 - Many biologists don't learn to code, worsening the **analysis bottleneck**
 
-- Most of [my job]{.blue} is helping biologists do this or do it for them
-  (more on this later)
+- Most of my job is helping biologists do this, or do it for them
 
 :::
 :::
@@ -279,19 +279,18 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 <br>
 
 ::: {.columns}
-::: {.column width="20%"}
+::: {.column width="10%"}
 :::
-::: {.column width="60%"}
+::: {.column width="80%"}
 
 ::: {.callout-note .quiz}
 #### In this age of AI, are computational skills less or more important for biologists?
 - Less
 - More
-- It's complicated
 :::
 
 :::
-::: {.column width="20%"}
+::: {.column width="10%"}
 :::
 :::
 
@@ -299,12 +298,20 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 - At Ohio State's Wooster campus, lead of **microscopy** and **bioinformatics** core facilities
 
-- Trained as a biologist, graduate and postdoc research in [evolutionary genomics]{.blue}
+. . .
+
+- Trained as a biologist, graduate and postdoc research in **evolutionary genomics**
 
 ![](img/speciation-research-img.png){fig-align="center" width="100%" fig-alt="Illustrations of study organisms from my speciation research: a hooded and a carrion crow, two mouse lemur species, and three cichlid fish."}
 
 ::: footer
 :::
+
+## The rest of this talk
+
+1. Omics, sequencing, and bioinformatics
+2. Bioinformatics at Ohio State
+3. AI in biology and bioinformatics
 
 # Omics, sequencing,<br>and bioinformatics {background-color="#A7B1B7"}
 
@@ -364,17 +371,17 @@ First *Oxford Nanopore* sequencer,<br>the pocket-sized MinION
 
 ## Why code to analyze omics data?
 
-Why not Excel or a point-and-click program?
+Why not Excel or a point-and-click (GUI) program?\
 Code is a **necessity** but also offers significant **benefits**
 
 <hr style="height:10pt; visibility:hidden;" />
 
 ::: {.columns}
-::: {.column width="29%" .box-tertiary}
+::: {.column width="29%" .box-tertiary .fragment data-fragment-index="1"}
 ### Necessary due to scale and tools
 
-- Often too large for Excel, for many other programs, and for laptops
-- Often only run from the command line
+- Data often too large for GUI programs and laptops
+- Tools often only run from the command line
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -383,21 +390,23 @@ Code is a **necessity** but also offers significant **benefits**
 ::: {.column width="2%"}
 :::
 
-::: {.column width="29%" .box-primary .fragment data-fragment-index="1"}
+::: {.column width="29%" .box-primary .fragment data-fragment-index="2"}
 ### Automation and flexibility
 
-- Code is nearly the same steps for 6 vs. 600 samples
+- Code is nearly the same to run 6 vs. 600 samples
 - More options to customize the analysis
 :::
 
 ::: {.column width="2%"}
 :::
 
-::: {.column width="30%" .box-secondary .fragment data-fragment-index="2"}
+::: {.column width="30%" .box-secondary .fragment data-fragment-index="3"}
 ### Reproducibility and transparency
 
 - Your code is a complete record of what you did
-- Rerunning in full or "without sample 7" a year later is much easier
+- Rerunning say a year later is much easier
+
+<!---- in full or "without sample 7"  --->
 
 :::
 :::
@@ -410,7 +419,7 @@ Ohio State is divided into 15 colleges, and I work at **CFAES**:\
 The College of Food, Agricultural, and Environmental Sciences
 
 ::: {.columns}
-::: {.column width="40%"}
+::: {.column width="40%" .fragment data-fragment-index="1"}
 
 **Departments include**:
 
@@ -433,7 +442,7 @@ The College of Food, Agricultural, and Environmental Sciences
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: {.callout-note appearance="simple"}
+::: {.callout-note appearance="simple" .fragment data-fragment-index="2"}
 The **Wooster** campus houses half of CFAES,
 and the **Columbus** campus houses the other half
 :::
@@ -443,7 +452,7 @@ and the **Columbus** campus houses the other half
 ::: {.columns}
 ::: {.column width="47%"}
 
-### [Why core facilities?]{style="display:block; text-align:center;"}
+### [Core facilities]{style="display:block; text-align:center;"}
 
 - Core facilities provide specialized resources like
   [equipment]{.blue} and [expertise]{.amber}
@@ -452,11 +461,11 @@ and the **Columbus** campus houses the other half
   cores allow researchers to **share** them
 
 :::
-::: {.column width="6%"}
+::: {.column width="6%" .fragment data-fragment-index="1"}
 <div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
 :::
 
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="1"}
 
 ### Our group of cores (["RASC"](https://cfaes.osu.edu/research/research-and-analytical-service-cores){target="_blank"}){style="display:block; text-align:center;"}
 
@@ -470,25 +479,33 @@ and the **Columbus** campus houses the other half
 :::
 
 ::: {.columns}
-::: {.column width="47%"}
-
-![](/img/rasc_QR.png){fig-align="right" width="40%" fig-alt="QR code linking to the CFAES Research and Analytical Service Cores page"}
-
-:::
-::: {.column width="6%"}
+::: {.column width="53%"}
 
 :::
 ::: {.column width="47%"}
 
-::: {.callout-tip appearance="simple"}
-- We also serve other institutions,<br>including the College of Wooster
+:::
+:::
+
+::: {.columns}
+::: {.column width="15%"}
+
+:::
+::: {.column width="70%"}
+
+::: {.callout-tip .fragment data-fragment-index="2"}
+#### Our services are available to you as well
+- We also serve other institutions, including the College of Wooster
 - User fees can be found on our website
 :::
 
 :::
+::: {.column width="15%"}
+
+:::
 :::
 
-## What our bioinformatics facility provides
+## What our bioinformatics facility does
 
 ::: {.columns}
 ::: {.column width="36%"}
@@ -499,20 +516,14 @@ and the **Columbus** campus houses the other half
 - **Teaching and training**\
   courses, workshops, 1-on-1 help
 
-<hr style="height:1pt; visibility:hidden;" />
-
-::: {.callout-note appearance="simple"}
-Our informal weekly [Code Club]{.blue} event on R is open to anyone!
 :::
-
-<hr style="height:1pt; visibility:hidden;" />
-
-![](/img/osc_logo.png){fig-align="center" width="40%" fig-alt="The Ohio Supercomputer Center logo"}
-
+::: {.column width="2%"}
 :::
-::: {.column width="64%"}
+::: {.column width="62%" .fragment data-fragment-index="1"}
 
-![](/img/code-club_screenshot.png){fig-align="center" width="95%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
+_Our informal weekly [Code Club]{.blue} event on R is open to anyone!_
+
+![](/img/code-club_screenshot.png){fig-align="center" width="90%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
 
 ::: legend2
 [https://osu-codeclub.github.io](https://osu-codeclub.github.io){target="_blank"}
@@ -521,7 +532,10 @@ Our informal weekly [Code Club]{.blue} event on R is open to anyone!
 :::
 :::
 
-## What our bioinformatics facility provides
+::: footer
+:::
+
+## What our bioinformatics facility does
 
 ::: {.columns}
 ::: {.column width="36%"}
@@ -534,20 +548,30 @@ Our informal weekly [Code Club]{.blue} event on R is open to anyone!
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: {.callout-note appearance="simple"}
-We hosted an intern from the College of Wooster last year
+::: {.fragment data-fragment-index="1"}
+
+![](/img/osc_logo.png){fig-align="center" width="65%" fig-alt="The Ohio Supercomputer Center logo"}
+
+:::
+
+::: {.column width="2%"}
 :::
 
 :::
 ::: {.column width="64%"}
 
-![](/img/orip2.png){fig-align="center" width="95%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_We hosted an intern from the College of Wooster last year_
+
+![](/img/orip2.png){fig-align="center" width="90%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
 
 ::: legend2
 [ORIP Program](https://cfaes.osu.edu/current-students/undergraduate-students/undergraduate-research/ohio-state-research-internship-program){target="_blank"}
 :::
 
 :::
+:::
+
+::: footer
 :::
 
 ## Example projects I
@@ -558,8 +582,8 @@ We hosted an intern from the College of Wooster last year
 ### [Assembly]{style="display:block; text-align:center;"}
 
 - A species of deep-sea anglerfish
-- *Phytophthora* oomycete with varying pathogenicity to soybean across strains
-- Transcriptome of the Austrian pine
+- *Phytophthora* oomycetes with varying pathogenicity to soybean
+- Austrian pine [transcriptome]{.amber}
 
 ![](/img/anglerfish_crop.jpg){fig-align="center" width="87%" fig-alt="A photograph of a deep-sea anglerfish, showing its large head, wide mouth, and the bioluminescent lure dangling from its forehead." .lightbox}
 
@@ -568,19 +592,19 @@ Image from Wainwright 2024 [@wainwright2024]
 :::
 
 :::
-::: {.column width="6%"}
+::: {.column width="6%" .fragment data-fragment-index="1"}
 <div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
 :::
 
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="1"}
 
 ### [Variant analysis]{style="display:block; text-align:center;"}
 
 - Population genomics of Brazilian pit vipers
-- Environmental adaptation GWAS of chile peppers
 - Loss of ice nucleation genes in bacteria
+- Environmental adaptation GWAS of chile peppers
 
-![](/img/hannah-gwas.png){fig-align="center" width="80%" fig-alt="GWAS result"}
+![](/img/hannah-gwas2.png){fig-align="center" width="90%" fig-alt="GWAS result"}
 
 :::
 :::
@@ -595,18 +619,18 @@ Image from Wainwright 2024 [@wainwright2024]
 
 ### [Transcriptomics]{style="display:block; text-align:center;"}
 
-- *Pantoea*-infected maize & *Arabidopsis*
+- Maize response to *Pantoea*-infection
 - *Aedes* mosquito response to mating
-- piRNA expression of aphids on soybean
+- Soybean aphid piRNA expression
 
 ![](/img/pirna-fig2.png){fig-align="center" width="95%" fig-alt="A volcano plot showing piRNA expression in aphids on soybean"}
 
 :::
-::: {.column width="6%"}
+::: {.column width="6%" .fragment data-fragment-index="1"}
 <div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
 :::
 
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="1"}
 
 ### [Microbial metagenomics]{style="display:block; text-align:center;"}
 
@@ -622,9 +646,9 @@ Image from Wainwright 2024 [@wainwright2024]
 ::: footer
 :::
 
-# Generative AI {background-color="#A7B1B7"}
+# AI in biology<br>and bioinformatics {background-color="#A7B1B7"}
 
-## AI has transformed ...
+## AI has transformed ... [education]{style="color:white"}
 
 ## AI has transformed ... education
 
@@ -660,19 +684,6 @@ From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas
   and asked: _"Did you write this?"_
 - ChatGPT said yes, so he gave the whole class an incomplete grade.
 - But ChatGPT can't recognize its own text, and the students hadn't done anything wrong.
-:::
-
-## AI has transformed ... office life
-
-✅ &nbsp; _More efficient communication_
-
-![](/img/marketoonist.png){fig-align="center" width="80%" fig-alt="Two-panel cartoon. Left: 'AI turns this single bullet point into a long email I can pretend I wrote.' Right: 'AI makes a single bullet point out of this long email I can pretend I read.'"}
-
-::: legend2
-© [Marketoonist](https://marketoonist.com/2023/03/ai-written-ai-read.html){target="_blank"}
-:::
-
-::: footer
 :::
 
 ## AI has transformed ... scientific publishing
@@ -746,16 +757,19 @@ What about **errors by AI** itself?
 
 ### "PhD-level intelligence"? {.h2-style}
 
+::: {.fragment data-fragment-index="1"}
+
 ![](img/ai-alphabet-crop.png){fig-align="left" width="95%" fig-alt="An AI-generated image illustrating the alphabet" .lightbox}
 
 ::: legend2
 A 2025 [alphabet poster](https://www.linkedin.com/posts/msukhareva_ai-tech-share-7346777128488640515-bTAd/){target="_blank"}.\
 "PhD-level": Sam Altman in Aug 2025.
 :::
-:::
-::: {.column width="65%"}
 
-. . .
+:::
+
+:::
+::: {.column width="65%" .fragment data-fragment-index="2"}
 
 ![](img/letter-count-unconventional-crop.png){fig-align="center" width="79%" fig-alt="A screenshot of a Microsoft Copilot response counting letters in a word" .lightbox}
 
@@ -773,26 +787,15 @@ Microsoft Copilot, Oct 2025 · Google AI Overview, May 2024
 ::: footer
 :::
 
-# AI in biology<br>and bioinformatics {background-color="#A7B1B7"}
-
 ## AI in biology
 
-Yet, genAI **can** be exceptionally helpful in research,
+Yet, genAI **can** be ***very*** helpful in research,
 including in biology and bioinformatics
 
 <hr style="height:10pt; visibility:hidden;" />
 
-<!----
-### Working with genAI
-
-- AI works with text. An agent can read your scripts, run them, and fix them,
-  but it can't easily repeat what you clicked through in a graphical program.
-- AI-written code can be checked and rerun, unlike numbers it reports in a chat.
-  But you have to be able to read the code yourself.
------->
-
 ::: {.columns}
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="1"}
 
 ### [Despite the blunders]{style="display:block; text-align:center;"}
 
@@ -802,11 +805,11 @@ including in biology and bioinformatics
 - AI is especially good with code
 
 :::
-::: {.column width="6%"}
+::: {.column width="6%" .fragment data-fragment-index="2"}
 <div style="border-left: 1px solid #A7B1B7; height: 100%; margin: 0 auto; width: 0;"></div>
 :::
 
-::: {.column width="47%"}
+::: {.column width="47%" .fragment data-fragment-index="2"}
 
 ### [The terminology can be confusing]{style="display:block; text-align:center;"}
 
@@ -854,7 +857,7 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 ## "AI in biology" can mean many things
 
 ::: {.columns}
-::: {.column width="31%" .box-tertiary}
+::: {.column width="31%" .box-tertiary .fragment data-fragment-index="1"}
 ### Predictive
 
 **Predict from / classify input**
@@ -865,7 +868,7 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 :::
 ::: {.column width="3%"}
 :::
-::: {.column width="31%" .box-primary .fragment data-fragment-index="1"}
+::: {.column width="31%" .box-primary .fragment data-fragment-index="2"}
 ### Generative (bio)
 
 **Create new molecules**
@@ -876,7 +879,7 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 :::
 ::: {.column width="3%"}
 :::
-::: {.column width="31%" .box-secondary .fragment data-fragment-index="2"}
+::: {.column width="31%" .box-secondary .fragment data-fragment-index="3"}
 ### Generic LLMs
 
 **Generate text**
@@ -890,11 +893,11 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: {.columns .fragment data-fragment-index="3"}
+::: {.columns .fragment data-fragment-index="4"}
 ::: {.column width="31%"}
 ::: {.callout-tip}
 #### AlphaFold's Nobel Prize
-2024: Nobel Prize in Chemistry for AlphaFold
+2024: Nobel Prize in Chemistry for [AlphaFold]{.teal}
 (shared with protein design) [@jumper2021]
 :::
 :::
@@ -903,7 +906,7 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 ::: {.column width="31%"}
 ::: {.callout-tip}
 #### Evo's phage genomes
-2026: Evo designed phage genomes
+2026: [Evo]{.teal} designed phage genomes
 better at killing *E. coli* than the natural phage [@king2026]
 :::
 :::
@@ -912,7 +915,7 @@ better at killing *E. coli* than the natural phage [@king2026]
 ::: {.column width="31%"}
 ::: {.callout-tip}
 #### Claude's enzymes
-2026: Claude agents found a new
+2026: [Claude]{.teal} agents found a new
 CRISPR-like enzyme system in phage DNA [@yoon2026]
 :::
 :::
@@ -940,9 +943,14 @@ CRISPR-like enzyme system in phage DNA [@yoon2026]
 - LLMs can only spit out text,
   but wrapped in an **agentic** interface, they can take actions
 
-- An agentic LLM works in a loop of **"tool calls"**
-  (editing files, running commands)\
-  until it considers the task done
+- This makes it vastly more useful: from an "[advisor]{.teal}" to a "[collaborator]{.blue}"
+
+. . .
+
+::: {style="text-align: center;"}
+_An agentic LLM works in a **loop** of **tool calls**_
+_(editing files, running commands) until it's done:_
+:::
 
 ![](img/claude-agentic-loop.svg){fig-align="center" width="90%" fig-alt="Diagram of the agentic loop: your prompt leads to a loop of gathering context, taking action, and verifying results, which repeats until done, while you can interrupt, steer, or add context." .lightbox}
 
@@ -965,6 +973,7 @@ Chat AI
 Agentic AI
 :::
 
+::: {.cmp-row .fragment}
 ::: {.cmp-label}
 Where it runs
 :::
@@ -974,7 +983,9 @@ A browser tab or stand-alone app
 ::: {}
 Where you write and run your code
 :::
+:::
 
+::: {.cmp-row .fragment}
 ::: {.cmp-label}
 What it can see
 :::
@@ -984,7 +995,9 @@ Only what you paste or upload
 ::: {}
 Project files, command outputs, etc.
 :::
+:::
 
+::: {.cmp-row .fragment}
 ::: {.cmp-label}
 What you need to tell it
 :::
@@ -994,7 +1007,9 @@ Error message, your OS, program versions, extensive context
 ::: {}
 Error message, less context
 :::
+:::
 
+::: {.cmp-row .fragment}
 ::: {.cmp-label}
 Workflow
 :::
@@ -1005,14 +1020,19 @@ Back-and-forth copy-and-paste
 Agent tries and retries until done
 :::
 :::
+:::
 
 <br>
 
-::: callout-note
-#### Reproducibility
+. . .
 
-Never use AI output/results directly,
-but let it create and edit [code you can check and rerun]{.blue}
+::: {.callout-note}
+#### Using this reproducibly and responsibly in bioinformatics
+
+- Never use AI output/results directly:
+  let it create and edit [code you can check and rerun]{.blue}
+
+- Make AI use [pre-existing tools]{.blue}, not invent new ones
 :::
 
 ::: notes
@@ -1054,31 +1074,40 @@ but let it create and edit [code you can check and rerun]{.blue}
 
 <hr style="height:1pt; visibility:hidden;" />
 
-::: notes
-- [TODO: one concrete before/after story?]
-- 2025: Deloitte partially refunded a government for a report with AI-fabricated references
+### [The bottom line --- [quality]{.teal} usually goes up; [speed-ups]{.blue} vary:]{style="display:block; text-align:center;" .fragment data-fragment-index="2"}
+
+::: {.columns}
+::: {.column width="12%"}
+
+:::
+::: {.column width="76%" .fragment data-fragment-index="2"}
+
+| Task                                     | Speed-up        |
+| ---------------------------------------- | --------------- |
+| Individual tasks                         | Can be manyfold |
+| Whole analysis, I know what I want       | Can be manyfold |
+| Whole analysis, I don't know what I want | Modest to none  |
+
+: {tbl-colwidths="[65,35]" .striped}
+
+:::
+::: {.column width="12%"}
+:::
 :::
 
-<hr style="height:1pt; visibility:hidden;" />
-
-::: callout-tip
-#### The bottom line --- [quality]{.underline} increase common, and [speed-ups]{.underline} for:
-- [Individual tasks]{.teal}: can be very high, up to an order of magnitude
-- [Whole analyses where I know what I want]{.blue}: idem
-- [Whole analyses where I don't know what I want]{.amber}:
-  varies, can be modest or nonexistent
+::: footer
 :::
 
 ## Pitfalls
 
 ::: {.columns}
 ::: {.column width="31%" .box-tertiary}
-### When it's wrong
+### Unreliability
 
-- **Hallucinations**,\
-  especially on niche topics
-- **Jagged frontier:**\
-  brilliant at some tasks, terrible at others
+- **Hallucinations**\
+  Especially on niche topics
+- **Jagged frontier**\
+  Brilliant at some tasks, terrible at others
 - **Confidence ≠ accuracy**
 
 :::
@@ -1087,9 +1116,9 @@ but let it create and edit [code you can check and rerun]{.blue}
 ::: {.column width="31%" .box-primary .fragment data-fragment-index="1"}
 ### Agreeableness
 
-- **Sycophancy:**
-  tells you what you want to hear
-- Can even argue the [opposite]{.amber} from the same evidence
+- **Sycophancy**\
+  Tells you what you want to hear
+- Can argue the *opposite* from the same evidence
 
 :::
 ::: {.column width="3%"}
@@ -1097,9 +1126,9 @@ but let it create and edit [code you can check and rerun]{.blue}
 ::: {.column width="31%" .box-secondary .fragment data-fragment-index="2"}
 ### Other
 
-- **0-to-90% problem:**\
-  The last 10% is [much harder]{.amber}
-  if you didn't do the first 90% yourself
+- **0-to-90% problem**\
+  Last 10% is *much harder*
+  if you didn't do the first 90%
 
 - Data privacy and<br>safety guardrails
 :::
@@ -1107,11 +1136,12 @@ but let it create and edit [code you can check and rerun]{.blue}
 
 <br>
 
+. . .
+
 **_This is a moving target:_**\
 _some of these pitfalls, and today's best-practice advice, may not hold next year_
 
 ::: {.notes}
-- May be prone to reinventing the wheel
 - Can overcomplicate things and be too detail-oriented
 
 April 2025: OpenAI rolled back a ChatGPT update that praised everything,
@@ -1162,12 +1192,12 @@ New York Times, July 27, 2026
 
 > The most important skill in prompting is expertise in the domain you're prompting for.
 >
-> --- [Sean Goedecke](https://www.seangoedecke.com/llms-reward-expertise){target="_blank"},
-> "_LLMs reward expertise_"
+> --- Sean Goedecke,
+> "[_LLMs reward expertise_](https://www.seangoedecke.com/llms-reward-expertise){target="_blank"}"
 
 <br>
 
-::: callout-note
+::: {.callout-note .fragment data-fragment-index="2"}
 #### Why expertise matters
 
 - Experts ask better questions, spot wrong answers,
@@ -1187,56 +1217,85 @@ New York Times, July 27, 2026
 
 - Less
 - More
-- It's complicated
 :::
 
 ## Back to the two central questions
 
-1. Can AI help address the analysis bottleneck in bioinformatics?
+1. Can AI help address the **analysis bottleneck** in bioinformatics? [Yes]{.teal .fragment data-fragment-index="1"}
 
-2. In this age of AI, are computational skills less or more important for biologists?
+2. In this age of AI, are **computational skills** less or more important for biologists?
+   [{{< fa circle-question size=xl >}}]{.amber .fragment data-fragment-index="2"}
 
-My take: it's complicated.
+<hr style="height:1pt; visibility:hidden;" />
 
-- Currently, foundational skills are *more* important
-- For example, if you work with code, AI can help you much more than if you don't
-- One way to think about it: AI can supercharge your skills as an "exponent"
+[Some thoughts on the *current* state of affairs:]{.fragment data-fragment-index="3"}
+
+::: {.columns}
+::: {.column width="4%"}
+:::
+::: {.column width="44%" .box-tertiary .fragment data-fragment-index="3"}
+### Foundations:<br>more important
+
+- AI can help you more if you use code
+- AI acts like an exponent on these skills:
+  the more you know, the more it helps
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="44%" .box-primary .fragment data-fragment-index="4"}
+### Encyclopedic details:<br>less important
+
+- Exact syntax, obscure options, low-level tools: superseded by AI
+
+- "Jack of all trades" now has a leg up: AI can fill in the depth, computationally
+
+:::
+::: {.column width="4%"}
+:::
+:::
 
 # Questions? {background-color="#A7B1B7"}
 
-<hr style="height:50pt; visibility:hidden;" />
+<br>
 
-::: {.columns}
-::: {.column width="33%"}
+::: {.qr-grid}
 
-![](img/qr-talk.svg){.nostretch width="200px" fig-align="center" fig-alt="QR code linking to the slide deck" style="background:#fff;"}
+::: {.qr-cell}
+![](img/qr-talk.svg){.nostretch width="170px" fig-alt="QR code linking to the slide deck" style="background:#fff;"}
 
 ::: {.qr-legend}
 **This slide deck**\
 [jelmerp.github.io/cow-talk_2026-11](https://jelmerp.github.io/cow-talk_2026-11/talk.html){target="_blank"}
 :::
-
 :::
-::: {.column width="33%"}
 
-![](/img/code-club_QR.png){.nostretch width="200px" fig-align="center" fig-alt="QR code linking to the Code Club page"}
+::: {.qr-cell}
+![](/img/rasc_QR.png){.nostretch width="170px" fig-alt="QR code linking to the CFAES Research and Analytical Service Cores page"}
+
+::: {.qr-legend}
+**CFAES service cores (RASC)**\
+Bioinformatics, genomics, microscopy & more
+:::
+:::
+
+::: {.qr-cell}
+![](/img/code-club_QR.png){.nostretch width="170px" fig-alt="QR code linking to the Code Club page"}
 
 ::: {.qr-legend}
 **Code Club**\
 Informal R coding sessions
 :::
-
 :::
-::: {.column width="33%"}
 
-![](/img/orip_QR.png){.nostretch width="200px" fig-align="center" fig-alt="QR code linking to the ORIP program page"}
+::: {.qr-cell}
+![](/img/orip_QR.png){.nostretch width="170px" fig-alt="QR code linking to the ORIP program page"}
 
 ::: {.qr-legend}
 **ORIP internships**\
 Ohio State undergraduate Research Internship Program
 :::
-
 :::
+
 :::
 
 ## References

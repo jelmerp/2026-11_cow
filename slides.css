@@ -543,13 +543,31 @@ details.details-quiz[open]>summary::after {
   margin-top: 0.8em;
 }
 
-.compare>div {
+.compare>div,
+.compare>.cmp-row>div {
   padding: 0.45em 0;
   border-bottom: 1px solid #DDDDDD;
 }
 
-.compare>div:nth-last-child(-n+3) {
+.compare>div:nth-last-child(-n+3),
+.compare>.cmp-row:last-child>div {
   border-bottom: none;
+}
+
+/* Optional row wrappers: `::: {.cmp-row .fragment}` around a label and its
+   two cells makes the row appear as one fragment. display: contents keeps
+   the cells in the parent grid; the opacity rules restore the fade, since
+   opacity on a box-less wrapper doesn't reach its children. */
+.compare>.cmp-row {
+  display: contents;
+}
+
+.compare>.cmp-row>div {
+  transition: opacity 0.2s ease;
+}
+
+.compare>.cmp-row.fragment:not(.visible)>div {
+  opacity: 0;
 }
 
 .compare p {
@@ -858,4 +876,32 @@ kbd {
 .reveal .fig-tight figure,
 .reveal .fig-tight p {
   margin: 0 !important;
+}
+
+/* --------------------------------------------------------------------------/*
+/* .qr-grid: 2x2 grid of QR codes, each with its legend to the right.
+   ::: {.qr-grid} containing four ::: {.qr-cell} blocks (image + .qr-legend) */
+.reveal .qr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4em 2.5em;
+  margin-top: 1.2em;
+}
+.reveal .qr-cell {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.reveal .qr-cell > p,
+.reveal .qr-cell img {
+  margin: 0;
+  flex: 0 0 auto;
+}
+.reveal .qr-cell .qr-legend {
+  text-align: left;
+  margin-top: 0;
+}
+.reveal .qr-cell .qr-legend a {
+  white-space: nowrap;
+  color: inherit;
 }
