@@ -2,7 +2,7 @@
 title: "Computational Skills and AI<br>in Modern Biology"
 #title: "Do Biologists Still Need to Code?<br>Bioinformatics in the Age of AI"
 #Why Learn to Code When AI Can Write It? Computational Skills in Modern Biology
-title-meta: "Bioinformatics in the Age of AI"
+title-meta: "Computational Skills and AI in Modern Biology"
 subtitle: "y code when ai?"
 date: 2026-11-19
 date-format: "D MMMM YYYY"
@@ -11,6 +11,8 @@ author: Jelmer Poelstra
 institute: "CFAES Bioinformatics Core, The Ohio State University"
 bibliography: references.bib   # copy needed entries from the PRACS references.bib
 csl: ieee.csl                   # numbered citations: [1], [2], ...
+nocite: |
+  @wickham2026ycode
 format:
   revealjs:
     theme: [default, theme_slides.scss]
@@ -54,155 +56,132 @@ From [genome.gov/sequencingcosts](https://genome.gov/sequencingcosts){target="_b
 
 ## This has led to a data explosion
 
-::: {.columns}
-::: {.column width="12%"}
-
-:::
-::: {.column width="76%"}
-
-::: {.callout-note .quiz}
-#### If sequencing one person's genome takes ~600 million sequence "reads",<br>how many Excel sheets would its data file fill?
-
-25 · 250 · 2,500 · 25,000
-:::
-
-:::
-::: {.column width="12%"}
-:::
-:::
+If sequencing one person's genome takes **~600 million sequence "reads"**,\
+how many Excel sheets would its data file fill?
 
 . . .
 
-<br>
-
-::: {.columns}
-::: {.column width="57%"}
+<hr style="height:1pt; visibility:hidden;" />
 
 ```{.default .dna .fastq-scroll code-line-numbers="false"}
 @A00123:8:H5KTLDSXX:1:1101:10004:1000 1:N:0:ATCACG
-GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCC
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCAAGCCCAATAAACCACTCTGACTGGCCGAATAGGGATATAGGCAACGACATGTGCGGCGACCCTTGCGACAGTGACGCTTTCGCCGTTGCCTAAACCTATTTGAAGGAGT
 +
-FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
+FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFFFFFF,FFFFFFFFF:::FFFF,FFFFFFF,FFF:FFF::FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFF:FFFFFF
 @A00123:8:H5KTLDSXX:1:1101:10013:1000 1:N:0:ATCACG
-CTTGCAAGGTCATCGACTTTAGGCTACCGTTAGCAAGTTC
+CTTGCAAGGTCATCGACTTTAGGCTACCGTTAGCAAGTTCTCCGCAAGAATCAACAACTACAATGGCGCGTCGTGAATAACGCGACGGCTGAGACGAACGGCGCGTGAATGAAGCGCTTAAACAGCTCAGGAGCCAGTCCCCTACGTCGC
 +
-FFFFFFFFFF:FFFFFFFFFFFFFFFF,FFFFFFFFFFFF
+FFFFFFFFFF:FFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFF,F:F,F:FFFFFFFFFFFF:FFFFFFFFFFFFFFFFFF:F:FFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFF,
 @A00123:8:H5KTLDSXX:1:1101:10183:1000 1:N:0:ATCACG
-CTAAAGACAATTACATAACATACACGTCAGCACGAAACTT
+CTAAAGACAATTACATAACATACACGTCAGCACGAAACTTGTTTCTTGCGTCGTAGCGGGACCCTCCATTGTTACTTATTAGGTTCTCGTTATGTCTCATAATCTCAGTGCTGGTGTGATAAGCAAACCACCCTACTGGCACGAAGTTCA
 +
-FF:FFFFFFFFFFFFFF:F:FFFFFFFFFFFFFFFFFFFF
+FF:FFFFFFFFFFFFFF:F:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFFFF:FFFFFFF,FFFFFFFFF:FFFFFFF:FFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:10365:1000 1:N:0:ATCACG
-ATGCATACGCCTTTACTTGCTGTGTCCACCCCATCGGACT
+ATGCATACGCCTTTACTTGCTGTGTCCACCCCATCGGACTGACATCTTTGTGAACCGACCCACATTTGACGGTACGCTACCGCAACGGTATGTGTTAATGGAACAGACTTGCTTATGTGGACGTTGTATAGGGATATTACGTTACGCGTT
 +
-FFFFF:FFFF:FFFFFFF,FFFFFF:FFFFF:FFFF,FFF
+FFFFF:FFFF:FFFFFFF,FFFFFF:FFFFF:FFFF,FFFF,FFFFFF,:FFFFFFFF,FFF:FFFFFF:FFFFF,FFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFF:FFFFFFFFFFFFFF:,FFFFFFF:FFFFFFFFFFFFF:
 @A00123:8:H5KTLDSXX:1:1101:10753:1000 1:N:0:ATCACG
-GGTCACGCAGAGGCGCGCCCTCCTGAAGTGCGTGGACACT
+GGTCACGCAGAGGCGCGCCCTCCTGAAGTGCGTGGACACTCCTGTGATGCATGGTGTGCTTACTGGGATGAATGCGCCGCAAGTAGCAGGTCCCGGCGTGGATACCTGATAGATGGTGACTAGCATGTACAAGTAACCTTGTCTATTGAG
 +
-FFF:FFFFFF:FFFFFFF,FF:FFFF:FFF,FFFFF,FF:
+FFF:FFFFFF:FFFFFFF,FF:FFFF:FFF,FFFFF,FF:FFFF,F:FFF::FFFF,FF,FFFFFFFFFFF,,FFFFFFFFFFFFFFFFFFFFF:FFFF,FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFF:FFFF:F:
 @A00123:8:H5KTLDSXX:1:1101:10980:1000 1:N:0:ATCACG
-CCAGCGCGGTCAGTTCCATCACCCTAAGTAACCGAATAAT
+CCAGCGCGGTCAGTTCCATCACCCTAAGTAACCGAATAATAGGGACCTCAGGAGCTAGACGGGGACCTACAACTTTGCGGGAACCAAGTTTTTGCAGTAGTGACTAACGCCGGGAATTCCTCGATATATAGTTTGATAGCTGATACTTAT
 +
-F,FFFFFFFFF::FFFFFFFFFFFF:FFFFFFFFFFFF,F
+F,FFFFFFFFF::FFFFFFFFFFFF:FFFFFFFFFFFF,FFFFFFFFFFF:FFFFFFFF:FFFFFFF,F,FFFFFFFFFFFFF,FFFF:FF:FFFF:FFF,FFFF,FFF:FFFFFFFFFFF:FFFF:FFFFFFFFFFF:,:FFFFF:FFF
 @A00123:8:H5KTLDSXX:1:1101:11200:1000 1:N:0:ATCACG
-CGGAGAGTTATGGAACAAGGACGCTGTCTGAGACTAGAAG
+CGGAGAGTTATGGAACAAGGACGCTGTCTGAGACTAGAAGCCAGAAGCTCCCCTATGCTGTCCGTCGTTGTTCCCGATGAAGACGTCTACTGATATGCTAGCAGAGCCAGTCTTAAAGCCTAGCGAACTTAATACCGTAGCTCAGAATTA
 +
-FFFFFFF:FFFFFFFFFFFFFFFFFFFFFF:FFFFFFFF,
+FFFFFFF:FFFFFFFFFFFFFFFFFFFFFF:FFFFFFFF,F,FFFFFFFFFFFFFFFFFFFFFFFFF:F,FFFFFFFFFFFFFF,FF:FFFFFFFFFFFFFFFFFF,F,:FFFFF:FFFFFFFFFFF:FFFFFFFFFFFFFFF,F:FFFF
 @A00123:8:H5KTLDSXX:1:1101:11380:1000 1:N:0:ATCACG
-CCTGACAAGTCAATGCGATCCGTAGGGGCAGCGCAGTATG
+CCTGACAAGTCAATGCGATCCGTAGGGGCAGCGCAGTATGTAGGAGGCCGCACCCTAGGTCAAGTTTTACGATTGCCCTAACGCCGCGGAGCGCGACCCGAAAAGCTATGGTCTGTAACTTTTCGCGGGTCGAGCTAGTCCAAGTTCCGG
 +
-FFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFF,FF:FFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:11400:1000 1:N:0:ATCACG
-ACGATTAACTGATAAATGAGCCCTTTATGACACGGGCATA
+ACGATTAACTGATAAATGAGCCCTTTATGACACGGGCATAGTCCGGCGGCTGTGGGATTGCGAGAGTGTCCGGCACCACCAATGTACACTTTCGGGAACACTCATTCGAAGAGGTTCTGCAGCTGCAGGCCTTGATACCTGCAGTCTGGG
 +
-F,FFFFFFF,FFFFFFF,,F::FFFFFFFFFFFFFF:FFF
+F,FFFFFFF,FFFFFFF,,F::FFFFFFFFFFFFFF:FFFFFFFFFFFF:FFFF:FF:FF,FF:FFFFFFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFF:FFF:FF:FFFF,FF,FF,FFFFFFFFFFFFF:FFFFF
 @A00123:8:H5KTLDSXX:1:1101:11618:1000 1:N:0:ATCACG
-GTGAGAGGTACAGGGATTAGTGAGAAGCCGTGCGTATCAA
+GTGAGAGGTACAGGGATTAGTGAGAAGCCGTGCGTATCAAACATTCCACGCGGCGCCTGGACTTAGTGTTCGTCTCCGCTATTCTCGCGATGACAGTAACCTCGGACCATCCTCGGTTGGGGTTATGCGGTACCAGTGCCGCTCTGGTTT
 +
-:FFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+:FFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFFFFFFFFFFFFFFFFFF,FFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFF:F:FFFFFFFFFFFFF,FF,FFFFF:FFFF,
 @A00123:8:H5KTLDSXX:1:1101:11730:1000 1:N:0:ATCACG
-TGGATGGCCAGCTTTTGACATTTAATTTCACCCATAAACC
+TGGATGGCCAGCTTTTGACATTTAATTTCACCCATAAACCTCGTTCTAGCAAGCTCTGGAAAGTGGACACTTTAAAGAGTAGTTACCTCCGGGTCACTGTGTAGGCTCTACGATGTGTGTCGGCTGCTGGTCGTGTGACCATCTGATTCG
 +
-FFF:FFFFFF:FFFFF,FFFFFFFFFFFFFFFFFFFFFFF
+FFF:FFFFFF:FFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFF:FFFFFFFFFFFFF,FFF:FFFFFFFFFFFFFFFF:F:FFFFFFFFFFFFFFFF,FFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:11884:1000 1:N:0:ATCACG
-ACTCGCCTCGGATCCTTACTACACTAACTTGAACGCCTAG
+ACTCGCCTCGGATCCTTACTACACTAACTTGAACGCCTAGTCTTCTCCTGCCGTAGATCCTTTTTTTCAACGAGCGCTTAAGGATCTACGATGGATACCGTCCCCAGGCGGGGACTAGCCCCGCTTCGTTTAATGGTTGAATGATCTCTG
 +
-FFFFFFFF:F:FFFFFFFF:FFFFFFFFFF:FFFFF:FFF
+FFFFFFFF:F:FFFFFFFF:FFFFFFFFFF:FFFFF:FFFFFFFFFFFFFFF:FF,F,:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFF,FF
 @A00123:8:H5KTLDSXX:1:1101:12051:1000 1:N:0:ATCACG
-GGAAACATTTGTTCTCAGCCGGTGACTCCTAATGCTAAGA
+GGAAACATTTGTTCTCAGCCGGTGACTCCTAATGCTAAGAAGCAATGTTTACGAGACCGTAGTCACATATAGCAACACTGGCGCGAAGTGAGATTGATCGCGAACAAACATGTCCATCGCTGGAGAACCATATGGGATAGCGGCTGTCCC
 +
-FF,,FFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFF
+FF,,FFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFF,FF:FFFF,FFFFFFF:FFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFF,FFFFFFFFFF,FFFFFFFFFF:FF:FFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:12363:1000 1:N:0:ATCACG
-CAGCTGAAGCAGGCACGACAGTGCGACATTATATCACTGT
+CAGCTGAAGCAGGCACGACAGTGCGACATTATATCACTGTCGTTTAAGTCTCCATGTTGGTGCAGCAGATGCCACCGACTGCCCGGAGCCTGCTAAACCATAGCCGCGAACCAGAGTAGGGCCTTGCGCCTGGCCATACGCATCGACGGC
 +
-,FFFFFFFFFFFF:FFFFFFFFFFFFF:FFFFFFFFFFFF
+,FFFFFFFFFFFF:FFFFFFFFFFFFF:FFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:,F,FFFFFFFF,FF:FFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFFF:F:FFFFFFFFF,F:
 @A00123:8:H5KTLDSXX:1:1101:12390:1000 1:N:0:ATCACG
-TGATACCTCTCCATCTGACCCAAGATTGTGCTTGTTCAAT
+TGATACCTCTCCATCTGACCCAAGATTGTGCTTGTTCAATTCCCCCATATCCGGAATTGGTATATCCAAAGGTGTTTACGTCTATGCATGGAGGGGTACCGTGGTACTCTTGACAGTCACCCACATAGCGGTTAACGTTCTGGCGAGATA
 +
-FFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFF:FFFFFF:FFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFF,FFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFF:F
 @A00123:8:H5KTLDSXX:1:1101:12709:1000 1:N:0:ATCACG
-GTCGTCGCGGACCTCGGTCGAAGTAGTGGTGCGGATCCAG
+GTCGTCGCGGACCTCGGTCGAAGTAGTGGTGCGGATCCAGGCATGCGAATGCCCTACTTTTTTAACGAGCAACCGGCATGCAAGGTGTCGTGCCTACCCCACAGATGAAAAAATTTAGTCCAGTAGCTAAGAATCCGCGTGCATCTGCAA
 +
-FFF,FFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFF
+FFF,FFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFF:FFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFF:FFFFFFFFFFF,F:FFFFFFFFFF,FFFFFFFFFFFF,FFFFFFFFF,FFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:13001:1000 1:N:0:ATCACG
-GTTCCAAAATCCCAAACCTCTCGAGATATTTATCCAGCAA
+GTTCCAAAATCCCAAACCTCTCGAGATATTTATCCAGCAAAAGCTGGACTGTGTAACAGGGGAACTCTAGCCATCTCGATAATTCTAATTCCCATGTTCGTGGTCCTGGCCCGGCCGAGTTGTAAATCAACGCGGCAGCAGTACTCGATT
 +
-FFFFFFFFFFFF:FFFFFF:FFFFF:FFF,FFFFFFFFFF
+FFFFFFFFFFFF:FFFFFF:FFFFF:FFF,FFFFFFFFFFFFF:FFFFFFFFFFFFFFFF,F:FFFFFFFFF:F:FFFFFFFFFF:FFFFFFFFFF:FFFFFFFFF:FFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:13045:1000 1:N:0:ATCACG
-CCAAAACGCAAACAAAAGCATACCCAAAAGTACACGGGTG
+CCAAAACGCAAACAAAAGCATACCCAAAAGTACACGGGTGCGTTTTTGATAAAAAGAGGAGTTTATCCCTGCGGACAAATAGCGCTCCCCGCACATAGAGACTGGCCAGACGTTGGCGGTCAGCCTGGCGTTTGGTACAGCCGAAAATCA
 +
-FFFFFF:FFFFFFFFFFFFFFFFFF,FFFFFFFFF:FFFF
+FFFFFF:FFFFFFFFFFFFFFFFFF,FFFFFFFFF:FFFFFF,FFFFFFFFFFFFFFFFFFF:F:FFFFFFFFF:FFFF,FFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:13106:1000 1:N:0:ATCACG
-ATAGGATTATAGCGGTCTCTCAGGCTGCTTGCCGTCCGGC
+ATAGGATTATAGCGGTCTCTCAGGCTGCTTGCCGTCCGGCTACTTCAACTCACTAAATCATTGATCTTGATCGTCAGTGCAAAATCGTGACTGGTGGTCTTCGTGGGTCACTCACTGACTAACTTAAGCGAATTGACTTACGCACCAGCA
 +
-F,FFFF:F:,FFFFFFFFF:FFFFFFF,FFFFFFFFFFFF
+F,FFFF:F:,FFFFFFFFF:FFFFFFF,FFFFFFFFFFFF,FFFFFFFF:FFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFF:FFF:FFFFFFFFFFFFFFF:FFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:13445:1000 1:N:0:ATCACG
-CCATTGGATCTCGTTTATCGATTAAGCCCGATCTAGGTTC
+CCATTGGATCTCGTTTATCGATTAAGCCCGATCTAGGTTCGGCGCGTGGCTTCTGGTGTCCCAGCTTCCCTACTTCGTGGATACACGTATGGGGGGATAGCCGGGTTATGTCCGTTAACGCGGGGTGTGTTCCACCGACCTAAATAATAA
 +
-,FF:FFFFFFF:FFFFFF:,,:FF:FFFFFFFFFFF,FFF
+,FF:FFFFFFF:FFFFFF:,,:FF:FFFFFFFFFFF,FFFFFFFFFFFFFFFFFF,FFF:FFFFFFFFFFFFFFFFFFFFFF::FFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFF:FFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:13690:1000 1:N:0:ATCACG
-GCGTGTCTAGGCGGTTTAGCGTAAGCGAACAGGACCCTGC
+GCGTGTCTAGGCGGTTTAGCGTAAGCGAACAGGACCCTGCACTACTTGGCAAGTGCGACACTGACGATCAATCGACCTAGAAGCACTCGGTCATGCGATTGTCCGGTGCACTGGGTATCAGCGATCTCGGTGAAAACCACATCAATTGAG
 +
-FFFFF,F:FFFFFFFFFFFFFFF:FFFFFFFFFFFF,FFF
+FFFFF,F:FFFFFFFFFFFFFFF:FFFFFFFFFFFF,FFFFFF:F:FFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFF::F,FFFFFFFFFFFF:FFFFFFF,FFF:F:FFFFFFFFFFFFFFFFFFFFFFFFFFF:FFF:FFF
 @A00123:8:H5KTLDSXX:1:1101:14026:1000 1:N:0:ATCACG
-AAAGATTCACTCGAGGTCGTGTGAGGGTTGGGCTAGCGGC
+AAAGATTCACTCGAGGTCGTGTGAGGGTTGGGCTAGCGGCATAGAGCGCCATTACTGTCCGATATGATTCCTCTTCCCAGTGAATTGGCGGAGCGTCTACCGCAAACCGAGAGTTAGCCCGTCATAGCAGCGATAATGGAAGTCTAGTAC
 +
-FFFFFFFFFFF:FFF:FFFFFFFFFFFFFF:FFFFFFFFF
+FFFFFFFFFFF:FFF:FFFFFFFFFFFFFF:FFFFFFFFFF:FFF:FFFFFFF,,FFFF,,::FFFFFFFFFFFFFFFFFFFFFFF:F:FFFFFFFFFFFF,:FFFFFFFFF,FFFFFFFFFFFFFFFFFF:::FFFFF:FFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:14251:1000 1:N:0:ATCACG
-ATAATTTAATCTTAATCCATAAAACACTAGCTCAGCAGTT
+ATAATTTAATCTTAATCCATAAAACACTAGCTCAGCAGTTTAATTACTATACGTTGGTCTGACTTAACCTTGTACTCTAGGCAAATGATCTTACGCCCCATGGTGCACCAGATTTATCCTTTTAACGCACCAGACAGGAAATCCGCTGAA
 +
-FF:FFFFFFFFF:FFF:FFF:F:FFFFFFFFFFFFFFFFF
+FF:FFFFFFFFF:FFF:FFF:F:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFF:FFFFFFFFFF:FFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:14414:1000 1:N:0:ATCACG
-TCTTTCTGAGGGTCAGCCGTGATTCCGATTCGATTAGACT
+TCTTTCTGAGGGTCAGCCGTGATTCCGATTCGATTAGACTCATATCCGTGGCACCATTAAGAAGTAAGAGCGCCGGGTAGCCGAAACGGGCGCCAGGTACATAATAATTCTGGGCATCATATGTTCCCGGTCGGTTAATAGTTCGGCATA
 +
-FFFFFFFFFFFFFFFF,FFFFFFFFFF,FFFFFF:FF:FF
+FFFFFFFFFFFFFFFF,FFFFFFFFFF,FFFFFF:FF:FFFFFFFFFF,FFFFFFFFFFF:FFFFFFF:FFFFFFFFFF:FFFFFFFFFFF:F:F,FFF,FFFFFFFFFFFFFFFFFFFFFF:FF,FFFFFFF,FFFFFFFFFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:14521:1000 1:N:0:ATCACG
-CTAAAAGTTATAAGGCATCTCGCCCAGGAAAGTAACGACG
+CTAAAAGTTATAAGGCATCTCGCCCAGGAAAGTAACGACGCGTGAATGATACGTAACTAGAGATTTGTGGGCAGGATCAGAGTACAGGCGGGAACCTGCGCTCAGACCTTTCTCCGAGAACTTTGTCTTTGCTAGTTGAAGTGGGGAGTT
 +
-FFFFFFFFFF:FF:FFFFFFFF::FFF,FFFFFFFFFFFF
+FFFFFFFFFF:FF:FFFFFFFF::FFF,FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FF:FFFFFFFF:FFFF:F:FF:FFFFFFFF:FFF:FFFFFFF:FFFFFFFFF:FFF:FF:FFFFFFF:FFF:FFFF:FF:FFFFFFFFF
 @A00123:8:H5KTLDSXX:1:1101:14652:1000 1:N:0:ATCACG
-CAGGGCGTAGTTACACTGAGCGTGCCATGTCAGCATGCTA
+CAGGGCGTAGTTACACTGAGCGTGCCATGTCAGCATGCTAAGTATCCACACTTAGTTAAGAGATACTCCAACTATACCACAGATCAAATCACTGTGACGCACGAAGCTCGCTCACATCATAAACAGTTCCCGTTCCACTAGGTACCAAGC
 +
-F:FFFFFFFFFFFFFFFFFFFFFFFFF:FFFF:FFFFFFF
+F:FFFFFFFFFFFFFFFFFFFFFFFFF:FFFF:FFFFFFFFFFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF::FFFFFFFFFFFFFFF:::FFF,FFFFFFFFFFFFFFF,FFFFFF,F
 @A00123:8:H5KTLDSXX:1:1101:14844:1000 1:N:0:ATCACG
-ACGAGTAAGCGTAGATTACACACCCAGGAAACGATCTAGA
+ACGAGTAAGCGTAGATTACACACCCAGGAAACGATCTAGACTCGTAATGAGTGCAGAGAATGTAGGCACCGCATCCGGGTGAAGGTTATGTGACTAATCGAACGACTCCAGTCTGTTAGCAACGTGGTTTGCGCGCTGGACGGTCCGCCC
 +
-FFFFFFFFFFFFFFFF:FFFFF:FFFFF,F:FFFF::FFF
+FFFFFFFFFFFFFFFF:FFFFF:FFFFF,F:FFFF::FFFFF,FFFFFF,FF,FFF:F::F,FFFFF:F,FFF:FFFFFFFFFFFFFFFFFFFF:,FFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FF:FFFFFFFF:FFFFFFFFFFFF
 ...
 ```
 
-:::
-::: {.column width="2%"}
-:::
-::: {.column width="43%"}
+<hr style="height:1pt; visibility:hidden;" />
 
-- Sequence data files use<br>4 lines per read, so ~2.4 billion lines
+- Sequence data files use 4 lines per read, so ~2.4 billion lines
 
 . . .
 
-- Excel's maximum is ~1 million rows: [~2,300 sheets]{.teal}
-
-:::
-:::
+- Excel's maximum is ~1 million rows: **~2,300 sheets**
 
 ::: notes
 - At 30x coverage
@@ -278,6 +257,8 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 
 <br>
 
+. . .
+
 ::: {.columns}
 ::: {.column width="10%"}
 :::
@@ -320,7 +301,7 @@ FFFFF:FFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFF
 ![](img/fisher-omics-crop.png){fig-align="center" width="55%" fig-alt="A diagram showing the main omics data types." .lightbox}
 
 ::: legend2
-Copyright [ThermoFisher](https://www.thermofisher.com/us/en/home/brands/thermo-scientific/molecular-biology/molecular-biology-learning-center/molecular-biology-resource-library/spotlight-articles/supporting-multi-omics-approaches.html){target="_blank"}
+Copyright [Thermo Fisher](https://www.thermofisher.com/us/en/home/brands/thermo-scientific/molecular-biology/molecular-biology-learning-center/molecular-biology-resource-library/spotlight-articles/supporting-multi-omics-approaches.html){target="_blank"}
 :::
 
 ## High-throughput sequencing & omics data
@@ -331,26 +312,26 @@ Copyright [ThermoFisher](https://www.thermofisher.com/us/en/home/brands/thermo-s
 ::: {.fragment data-fragment-index="1"}
 
 - Its development is a key cause of the data explosion:\
-  from sequencing **single** fragments ([Sanger]{.amber}) to **millions** of fragments ([HTS]{.teal}) at a time
+  from sequencing **single** fragments ([Sanger]{.gray}) to **millions** of fragments ([HTS]{.scarlet}) at a time
 
 :::
 
 ::: {.timeline .vertical-alt .tl-label-opposite .tl-dot-center .fragment data-fragment-index="2" style="--tl-color-line: var(--color-secondary); --tl-color-accent: var(--color-primary); --tl-gap: 0;"}
 
 ::: {.event data-label="1986" .fragment data-fragment-index="2" style="margin-bottom: 4.2rem;"}
-First automated ([Sanger]{.amber}) sequencer
+First automated ([Sanger]{.gray}) sequencer
 :::
 
 ::: {.event data-label="2005" .fragment data-fragment-index="2" style="margin-bottom: -0.7rem;"}
-First [high-throughput]{.teal} sequencer, by *454*
+First [high-throughput]{.scarlet} sequencer, by *454*
 :::
 
 ::: {.event data-label="2006" .fragment data-fragment-index="3" style="margin-bottom: 1rem;"}
-First *Illumina* ([short-read HTS]{.teal}) sequencer
+First *Illumina* ([short-read HTS]{.scarlet}) sequencer
 :::
 
 ::: {.event data-label="2011" .fragment data-fragment-index="3" style="margin-bottom: 0.5rem;"}
-First [long-read HTS]{.teal} sequencer, by *PacBio*
+First [long-read HTS]{.scarlet} sequencer, by *PacBio*
 :::
 
 ::: {.event data-label="2015" .fragment data-fragment-index="3" style="margin-bottom: -0.7rem;"}
@@ -380,8 +361,8 @@ Code is a **necessity** but also offers significant **benefits**
 ::: {.column width="29%" .box-tertiary .fragment data-fragment-index="1"}
 ### Necessary due to scale and tools
 
-- Data often too large for GUI programs and laptops
-- Tools often only run from the command line
+- Data often **too large** for GUI programs and laptops
+- Tools often **only** run from the command line (etc.)
 
 <hr style="height:1pt; visibility:hidden;" />
 
@@ -393,8 +374,8 @@ Code is a **necessity** but also offers significant **benefits**
 ::: {.column width="29%" .box-primary .fragment data-fragment-index="2"}
 ### Automation and flexibility
 
-- Code is nearly the same to run 6 vs. 600 samples
-- More options to customize the analysis
+- Code is nearly the same to run **6 vs. 600** samples
+- More options to **customize** the analysis
 :::
 
 ::: {.column width="2%"}
@@ -403,8 +384,8 @@ Code is a **necessity** but also offers significant **benefits**
 ::: {.column width="30%" .box-secondary .fragment data-fragment-index="3"}
 ### Reproducibility and transparency
 
-- Your code is a complete record of what you did
-- Rerunning say a year later is much easier
+- Your code is a complete **record** of what you did
+- **Rerunning** everything, say, a year later is much easier
 
 <!---- in full or "without sample 7"  --->
 
@@ -455,7 +436,7 @@ and the **Columbus** campus houses the other half
 ### [Core facilities]{style="display:block; text-align:center;"}
 
 - Core facilities provide specialized resources like
-  [equipment]{.blue} and [expertise]{.amber}
+  **equipment** and **expertise**
 
 - Instead of duplicating expensive equipment and expertise in every lab,
   cores allow researchers to **share** them
@@ -467,7 +448,7 @@ and the **Columbus** campus houses the other half
 
 ::: {.column width="47%" .fragment data-fragment-index="1"}
 
-### Our group of cores (["RASC"](https://cfaes.osu.edu/research/research-and-analytical-service-cores){target="_blank"}){style="display:block; text-align:center;"}
+### [Our group of cores ("RASC")]{style="display:block; text-align:center;"}
 
   - Bioinformatics
   - Molecular Biology & Genomics\
@@ -496,7 +477,7 @@ and the **Columbus** campus houses the other half
 ::: {.callout-tip .fragment data-fragment-index="2"}
 #### Our services are available to you as well
 - We also serve other institutions, including the College of Wooster
-- User fees can be found on our website
+- User fees can be found on [our website](https://cfaes.osu.edu/research/research-and-analytical-service-cores){target="_blank"}
 :::
 
 :::
@@ -521,9 +502,9 @@ and the **Columbus** campus houses the other half
 :::
 ::: {.column width="62%" .fragment data-fragment-index="1"}
 
-_Our informal weekly [Code Club]{.blue} event on R is open to anyone!_
+&nbsp;&nbsp; _Our informal weekly [Code Club](https://osu-codeclub.github.io){target="_blank"} event on R is open to anyone_
 
-![](/img/code-club_screenshot.png){fig-align="center" width="90%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
+![](/img/code-club_screenshot.png){fig-align="center" width="90%" fig-alt="Screenshot of the Code Club website"}
 
 ::: legend2
 [https://osu-codeclub.github.io](https://osu-codeclub.github.io){target="_blank"}
@@ -562,10 +543,10 @@ _Our informal weekly [Code Club]{.blue} event on R is open to anyone!_
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_We hosted an intern from the College of Wooster last year_
 
-![](/img/orip2.png){fig-align="center" width="90%" fig-alt="Screenshot of the Code Club page on the CFAES website"}
+![](/img/orip2.png){fig-align="center" width="90%" fig-alt="Screenshot of the Ohio State Research Internship Program (ORIP) web page"}
 
 ::: legend2
-[ORIP Program](https://cfaes.osu.edu/current-students/undergraduate-students/undergraduate-research/ohio-state-research-internship-program){target="_blank"}
+[Ohio State Research Internship Program (ORIP)](https://cfaes.osu.edu/current-students/undergraduate-students/undergraduate-research/ohio-state-research-internship-program){target="_blank"}
 :::
 
 :::
@@ -583,7 +564,7 @@ _Our informal weekly [Code Club]{.blue} event on R is open to anyone!_
 
 - A species of deep-sea anglerfish
 - *Phytophthora* oomycetes with varying pathogenicity to soybean
-- Austrian pine [transcriptome]{.amber}
+- Austrian pine *transcriptome*
 
 ![](/img/anglerfish_crop.jpg){fig-align="center" width="87%" fig-alt="A photograph of a deep-sea anglerfish, showing its large head, wide mouth, and the bioluminescent lure dangling from its forehead." .lightbox}
 
@@ -619,7 +600,7 @@ Image from Wainwright 2024 [@wainwright2024]
 
 ### [Transcriptomics]{style="display:block; text-align:center;"}
 
-- Maize response to *Pantoea*-infection
+- Maize response to *Pantoea* infection
 - *Aedes* mosquito response to mating
 - Soybean aphid piRNA expression
 
@@ -635,15 +616,19 @@ Image from Wainwright 2024 [@wainwright2024]
 ### [Microbial metagenomics]{style="display:block; text-align:center;"}
 
 - Wastewater treatment biofilms vs. salinity
-- Stools in white vs. whole wheat bread diets
+- Gut microbiome on various bread diets
 - Stock plants infected with *Xanthomonas*
 
-![](/img/phyto-03-26-0074-fif6_crop1.jpg){fig-align="center" width="95%" fig-alt="A heatmap showing the relative abundance of different bacterial taxa in maize plants infected with Xanthomonas, with samples on the x-axis and taxa on the y-axis." .lightbox}
+![](/img/phyto-03-26-0074-fif6_crop1.jpg){fig-align="center" width="95%" fig-alt="A heatmap showing the relative abundance of different bacterial taxa in stock plants infected with Xanthomonas, with samples on the x-axis and taxa on the y-axis." .lightbox}
 
 :::
 :::
 
 ::: footer
+:::
+
+::: notes
+Various bread diets = whole-wheat vs white
 :::
 
 # AI in biology<br>and bioinformatics {background-color="#A7B1B7"}
@@ -676,7 +661,7 @@ Image from Wainwright 2024 [@wainwright2024]
 ![](/img/rollingstone-professor-flunks.png){fig-align="center" width="80%" fig-alt="A screenshot of a Rolling Stone article headline: 'Professor Flunks All His Students After ChatGPT Falsely Claims It Wrote Their Papers'" .lightbox}
 
 ::: legend2
-From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas-am-chatgpt-ai-professor-flunks-students-false-claims-1234736601/), May 2023
+From [Rolling Stone](https://www.rollingstone.com/culture/culture-features/texas-am-chatgpt-ai-professor-flunks-students-false-claims-1234736601/){target="_blank"}, May 2023
 :::
 
 ::: notes
@@ -802,7 +787,7 @@ including in biology and bioinformatics
 - Models are improving extremely fast ---\
   slapstick mistakes, and others, are gone
 - Skill at one task says little about another
-- AI is especially good with code
+- AI is especially good at code
 
 :::
 ::: {.column width="6%" .fragment data-fragment-index="2"}
@@ -862,8 +847,8 @@ Adapted from [Gladstone Institutes](https://gladstone-institutes.github.io){targ
 
 **Predict from / classify input**
 
-- Protein structure from sequence (*AlphaFold*)
 - DNA variants from reads (*DeepVariant*)
+- Protein structure from sequence (*AlphaFold*)
 
 :::
 ::: {.column width="3%"}
@@ -943,7 +928,7 @@ CRISPR-like enzyme system in phage DNA [@yoon2026]
 - LLMs can only spit out text,
   but wrapped in an **agentic** interface, they can take actions
 
-- This makes it vastly more useful: from an "[advisor]{.teal}" to a "[collaborator]{.blue}"
+- This makes them vastly more useful: from an "**advisor**" to a "**collaborator**"
 
 . . .
 
@@ -1150,7 +1135,7 @@ including a plan to sell literal "poop on a stick".
 Deloitte, Oct 2025: a ~A$440,000 report for Australia's Department of Employment
 and Workplace Relations contained fabricated academic references and a made-up quote
 from a Federal Court judgment. Spotted by a University of Sydney researcher;
-Deloitte refunded the final installment and disclosed it had used GPT-4o. [verify details]
+Deloitte refunded the final installment and disclosed it had used GPT-4o.
 
 2024, Air Canada's chatbot invented a refund policy. A tribunal ruled the
 airline had to honor it, rejecting the argument that the chatbot was
@@ -1254,6 +1239,15 @@ New York Times, July 27, 2026
 :::
 :::
 
+::: legend2
+<hr style="height:35pt; visibility:hidden;" />
+This talks's subtitle was borrowed from Hadley Wickham's talk [*y code when ai?*](https://www.youtube.com/watch?v=oi5mopOO4_Y){target="_blank"}
+:::
+
+::: notes
+- Subtitle "y code when ai?" borrowed from Hadley Wickham's talk of the same name
+:::
+
 # Questions? {background-color="#A7B1B7"}
 
 <br>
@@ -1292,7 +1286,7 @@ Informal R coding sessions
 
 ::: {.qr-legend}
 **ORIP internships**\
-Ohio State undergraduate Research Internship Program
+Ohio State Research Internship Program (undergraduates)
 :::
 :::
 

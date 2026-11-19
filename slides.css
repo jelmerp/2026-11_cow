@@ -628,6 +628,16 @@ kbd {
   font-weight: 600;
 }
 
+.scarlet {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.gray {
+  color: #666666;
+  font-weight: 600;
+}
+
 /* Brand colors, same style as the accent colors above */
 .primary {
   color: var(--color-primary);
@@ -845,8 +855,8 @@ kbd {
   background: url("img/cfaes-leaf-transparent.png") no-repeat center / contain;
 }
 
-/* Timeline text: dark gray (years + descriptions); dots/line keep accent colors */
-.timeline .event,
+/* Timeline text: years dark gray, descriptions body black (so inline .gray
+   highlights stand out); dots/line keep accent colors */
 .timeline .event::before {
   color: #5a5a5a;
 }
